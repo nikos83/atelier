@@ -10,7 +10,7 @@ class ReservationsController < ApplicationController
     reservations_handler.take(book)
     @user = current_user
     @book =  Book.first
-    BookTakenMailer.book_taken_email(@user).deliver_now
+   BookTakenMailer.book_taken_email(@user).deliver_now
     redirect_to(book_path(book.id))
   end
 
