@@ -26,7 +26,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
   #devise
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+ # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -56,19 +56,16 @@ Rails.application.configure do
   
   # Gmail configuration
 # ActionMailer Config
-config.action_mailer.default_url_options = { :host => 'ksiegarnia-nikodem.c9users.io' }
-config.action_mailer.delivery_method = :smtp
-# change to true to allow email to be sent during development
-config.action_mailer.perform_deliveries = false
-config.action_mailer.raise_delivery_errors = true
-config.action_mailer.default :charset => "utf-8"
-config.action_mailer.smtp_settings = {
-  address: "poczta.interia.pl",
-  port: 465,
-  domain: "ksiegarnia-nikodem.c9users.io",
-  authentication: "plain",
-  enable_starttls_auto: true,
-  user_name:ENV['EMAIL_USER'],
-  password:ENV['EMAIL_PASS']
+  config.action_mailer.default_url_options = { :host => 'https://mot-remainder-nikodem.c9.io' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      authentication: "plain",
+    #  enable_starttls_auto: true,
+      user_name: "",
+      password: ""
 }
 end
