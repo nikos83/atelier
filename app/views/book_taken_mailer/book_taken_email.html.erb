@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @user.email %></h1>
+    <p>
+   
+You've taken book: <%= link_to @book.title, book_url(@book, host: "ksiegarnia-nikodem.c9users.io") %>
+    </p>
+    <h3>Information:</h3>
+    <p>Title: <%= @book.title %></p>
+    <p>ISBN: <%= @book.isbn %></p>
+    <p>Category: <%= @book.category_name %></p>
+    <% if @book.published_date %>
+    <p>Published at: <%= @book.published_date %></p>
+    <% end %>
+    <% if @book.page_count %>
+    <p>Page count: <%= @book.page_count %></p>
+    <% end %>
+    <p>Expires at: <%= @book.reservations.last.expires_in %></p>
+  </body>
+</html>

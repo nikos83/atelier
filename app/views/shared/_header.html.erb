@@ -8,7 +8,7 @@
         <li><%= link_to 'edit', edit_user_registration_path %></li>
         <li><%= link_to 'my reservations', users_reservations_path(current_user.id)  %></li>
       </ul>
-      <span class="user-data__user"><%= current_user.email %></span>
+      <span class="user-data__user"><%= image_tag gravatar_url(current_user.email, 24), alt: "" %></span>
       <%= button_to('log out', destroy_user_session_path, method: :delete, class: "btn btn--logout") %>
     </div>
   <% end %>

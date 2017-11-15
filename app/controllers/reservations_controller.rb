@@ -9,8 +9,7 @@ class ReservationsController < ApplicationController
   def take
     reservations_handler.take(book)
     @user = current_user
-    @book =  Book.first
-   BookTakenMailer.book_taken_email(@user).deliver_now
+   BookTakenMailer.book_taken_email(@user, @book).deliver_now
     redirect_to(book_path(book.id))
   end
 
@@ -26,6 +25,9 @@ class ReservationsController < ApplicationController
 
   def users_reservations
   end
+ def book
+    @book ||= Book.find(params[:book_id])
+  end
 
   private
 
@@ -33,10 +35,7 @@ class ReservationsController < ApplicationController
     @handler ||= ::ReservationsHandler.new(current_user)
   end
 
-  def book
-    @book ||= Book.find(params[:book_id])
-  end
-
+ 
   def load_user
     @user = User.find(params[:user_id])
   end

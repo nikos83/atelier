@@ -1,5 +1,19 @@
 <main class="main-content">
-  <h2><%= @user.email %></h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Information</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= image_tag gravatar_url(@user.email, 64), alt: "" %> </td>
+        <td> <% if @user.name? %><%= @user.name %><br><% end %> <%= @user.email %></td>
+      </tr>
+    </tbody>
+  </table>
+ 
   <% if @user.reservations.active.any? %>
     <h3>reservations:</h3>
     <table>
@@ -14,7 +28,7 @@
         <% @user.reservations.active.each do |reservation| %>
           <tr>
             <td class='book-status book-status--<%= reservation.status.underscore %>'><%= reservation.status %></td>
-            <td><%= reservation.book.title %></td>
+            <td><%= link_to reservation.book.title, book_path(reservation.book) %></td>
             <td><%= reservation.expires_in %></td>
           </tr>
         <% end %>
@@ -35,7 +49,7 @@
       <tbody>
         <% @user.reservations.completed.each do |reservation| %>
           <tr>
-            <td><%= reservation.book.title %></td>
+            <td><%= link_to reservation.book.title, book_path(reservation.book) %></td>
           </tr>
         <% end %>
       </tbody>

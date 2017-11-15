@@ -1,8 +1,11 @@
 class BookTakenMailer < ApplicationMailer
   default from: "nikos92@poczta.fm"
 
-  def book_taken_email(user)
+  def book_taken_email(user, book)
     @user = user
-    mail(to: @user.email, subject: 'Confirmation emial')
+    @book = book
+    mail(to: @user.email, subject: @book.title) do |format|
+      format.html
+    end
   end
 end

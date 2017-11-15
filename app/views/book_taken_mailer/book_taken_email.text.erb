@@ -1,3 +1,5 @@
 
 Hi <%= @user.email %>
-You've taken book: 
+You've taken book: <%= @book.title %> See it here: <%= link_to 'See it', book_url(@book, host: "ksiegarnia-nikodem.c9users.io") %>
+
+

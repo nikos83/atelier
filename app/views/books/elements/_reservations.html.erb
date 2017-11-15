@@ -13,7 +13,7 @@
         <td class='book-status book-status--<%= reservation.status.underscore %>'><%= reservation.status %></td>
         <td><%= reservation.created_at.to_date %></td>
         <td><%= reservation.expires_in %></td>
-        <td><%= reservation.user.email %></td>
+        <td><%= link_to reservation.user.email, users_reservations_path(reservation.user) %></td>
       </tr>
     <% end %>
   </tbody>

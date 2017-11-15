@@ -1,3 +1,0 @@
-mailcatcher --http-port 8081 --http-ip $IP
- rails s -p $PORT -b $IP
- 
