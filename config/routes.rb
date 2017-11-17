@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   get 'google-isbn', to: 'google_books#show'
 
   resources :books
+  
+  get 'api/v1/books/lookup', to: 'api/v1/books#lookup'
+  get 'books/filter', to: 'books#filter', as: 'filter'
 end

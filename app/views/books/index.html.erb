@@ -5,6 +5,7 @@
       <tr>
         <th>title</th>
         <th>ISBN</th>
+        <th>Category</th>
         <th>action</th>
       </tr>
     </thead>
@@ -13,7 +14,9 @@
         <tr>
           <td><%= book.title %></td>
           <td><%= book.isbn %></td>
+          <td><%= book.category_name %></td>
           <td><%= link_to('show', book_path(book.id)) %>
+          <%=link_to('edit', edit_book_path(book.id))%>
         </tr>
       <% end %>
     </tbody>

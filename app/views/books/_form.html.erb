@@ -1,0 +1,17 @@
+<%= form_for(book) do |f| %>
+  <p>
+    <b>Book Name</b><br>
+    <%= f.text_field :title %>
+  </p>
+   <p>
+    <b>Book Category</b><br>
+    <%= f.text_field :category_name %>
+  </p>
+     <p>
+    <b>Book ISBN</b><br>
+    <%= f.text_field :isbn %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

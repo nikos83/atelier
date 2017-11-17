@@ -10,7 +10,9 @@ class BooksController < ApplicationController
   end
 
   def edit
+      @book = Book.find(params[:id])
   end
+  
 
   def create
     if new_book.save
@@ -19,6 +21,15 @@ class BooksController < ApplicationController
       redirect_to new_book_path
     end
   end
+  def update
+  @book = Book.find(params[:id])
+ 
+  if @book.update(book_params)
+    redirect_to books_path
+  else
+    render 'edit'
+  end
+end
 
   def show
   end
@@ -38,5 +49,8 @@ class BooksController < ApplicationController
 
   def new_book
     @book = Book.new(title: params[:title], isbn: params[:isbn], category_name: params[:category_name])
+  end
+   def book_params
+    params.require(:book).permit(:title, :isbn, :category_name)
   end
 end
