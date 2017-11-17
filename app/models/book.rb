@@ -2,7 +2,7 @@ class Book < ApplicationRecord
   has_many :reservations
   has_many :borrowers, through: :reservations, source: :user
   belongs_to :category
-
+  validates :title, :category_name, presence: true
   # statuses: AVAILABLE, TAKEN, RESERVED, EXPIRED, CANCELED, RETURNED
 
   def category_name

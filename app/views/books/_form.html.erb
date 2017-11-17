@@ -1,3 +1,16 @@
+
+ <% if @book.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@book.errors.count, "error") %> prohibited
+        this book from being saved:</h2>
+    <ul>
+    <% @book.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="basic-form">
 <%= form_for(book) do |f| %>
   <p>
     <b>Book Name</b><br>
@@ -11,7 +24,10 @@
     <b>Book ISBN</b><br>
     <%= f.text_field :isbn %>
   </p>
-  <p>
-    <%= f.submit %>
-  </p>
+
+    <%= button_tag type: 'submit', class: 'btn' do %>
+      <i class="fa fa-check"></i>
+      update
+    <% end %>
 <% end %>
+<div>

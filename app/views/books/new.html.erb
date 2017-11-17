@@ -1,3 +1,5 @@
+
+
 <div class="basic-form">
   <h2>New book</h2>
   <%= form_tag books_path, method: :post do %>
@@ -27,7 +29,7 @@
       save
     <% end %>
 
-    <%= button_tag books_path, method: :get, class: 'btn btn--cancel' do %>
+    <%= button_tag type: 'cancel', class: 'btn btn--cancel' do %>
       cancel
     <% end %>
   <% end %>
