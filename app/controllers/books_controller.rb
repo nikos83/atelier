@@ -49,8 +49,7 @@ end
 
   def filter_params
     permitted_params
-      .slice(:title, :isbn)
-      .merge(category.present? ? { category_id: category.id } : {})
+      .slice(:title, :isbn) # .merge(category.present? ? { category_id: category.id } : {})
       .reject{ |k, v| v.to_s.empty? }
   end
 
