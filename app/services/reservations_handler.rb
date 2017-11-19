@@ -6,7 +6,6 @@ class ReservationsHandler
   def take(book)
     return "Books is not available for reservation" unless book.can_be_taken?(user)
     if book.available_reservation.present?
-      ::BookReservationExpireWorker.perform_at(book.available_reservation.expires_at-10.seconds, book.available_reservation.book_id)
       book.available_reservation.update_attributes(status: 'TAKEN')
     else
       book.reservations.create(user: user, status: 'TAKEN')
