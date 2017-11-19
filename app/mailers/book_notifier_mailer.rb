@@ -3,7 +3,7 @@ class BookNotifierMailer < ApplicationMailer
 
   def book_return_remind(book)
     @book = book
-    @reservation = reservations.find_by(status: "TAKEN")
+    @reservation = book.reservations.find_by(status: "TAKEN")
     @borrower = @reservation.user
 
     mail(to: @borrower.email, subject: "Upływa termin zwrotu książki #{@book.title}") do |format|
@@ -11,11 +11,11 @@ class BookNotifierMailer < ApplicationMailer
     end
   end
   
-  def book_available_reservation(book)
+  def book_reserved_return(book)
     @book = book
-    @reservation = reservations.find_by(status: "RESERVED")
-    @borrower = @reservation.user
-     mail(to: @borrower.email, subject: "Upływa termin zwrotu książki #{@book.title}") do |format|
+    @reservation = book.reservations.find_by(status: "RESERVED")
+    @next_borrower = @reservation.user
+     mail(to: @next_borrower.email, subject: "Upływa termin zwrotu książki #{@book.title}") do |format|
       format.html
     end
   end

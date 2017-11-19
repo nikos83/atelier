@@ -4,9 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @borrower.email %></h1>
+    <h1>Hi <%= @next_borrower.email %></h1>
    <p>
-  <%= @book.reservations.last.expires_in %> upływa termin oddania książki pt. <%= @book.title %>. Prosimy - zwróć książkę w terminie!<br>
+  <%= @book.reservations.last.expires_in %> upływa termin oddania książki pt. <%= @book.title %>. Będzie jutro dostępna!<br>
   <%= link_to "Przejdź do książki", book_url(@book.id, host: "localhost:3000") %>
 </p>
   </body>
