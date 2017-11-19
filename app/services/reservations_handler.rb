@@ -2,7 +2,7 @@ class ReservationsHandler
   def initialize(user)
     @user = user
   end
-
+  
   def take(book)
     return "Books is not available for reservation" unless book.can_be_taken?(user)
     if book.available_reservation.present?
