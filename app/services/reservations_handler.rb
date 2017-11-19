@@ -7,8 +7,9 @@ class ReservationsHandler
     return "Books is not available for reservation" unless book.can_be_taken?(user)
     if book.available_reservation.present?
       book.available_reservation.update_attributes(status: 'TAKEN')
+      perform_expiration_worker(book.available_reservation)
     else
-      book.reservations.create(user: user, status: 'TAKEN')
+      perform_expiration_worker( book.reservations.create(user: user, status: 'TAKEN'))     
     end
   end
 
@@ -32,6 +33,9 @@ class ReservationsHandler
 
   private
   attr_reader :user
+  def perform_expiration_worker(res)
+      ::BookReservationExpireWorker.perform_at(res.expires_at-1.day, res.book_id)
+  end
 
 
   def next_in_queue(book)
