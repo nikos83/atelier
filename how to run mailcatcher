@@ -1,0 +1,4 @@
+mailcatcher --http-port 8081 --http-ip $IP
+mailcatcher --foreground --http-port 8081 --http-ip $IP --smtp-port 8082 --smtp-ip $IP
+mailcatcher --http-port 8081 --http-ip $IP --smtp-port 8082 --smtp-ip $IP
+rails s -p $PORT -b $IP
