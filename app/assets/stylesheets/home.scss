@@ -1,5 +1,6 @@
 
 // color variables
+$pure-white: #fff;
 $white: #ECEFF1;
 $gray: #37474F;
 $green: #22887B;
@@ -40,7 +41,8 @@ h3 {
   font-size: 18px;
   margin: 20px 0;
 }
-input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], select {
+  background: $pure-white;
   border: 1px solid lighten($gray, 60%);
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 17px;
@@ -131,6 +133,54 @@ a:not(.btn) {
   i {
     display: inline-block;
     margin-bottom: 3px;
+  }
+  select {
+    display: block;
+    width: 100%;
+  }
+}
+
+.custom-select {
+  display: block;
+  position: relative;
+  select {
+    border-radius: 0;
+    display: block;
+    margin: 0;
+    outline: none;
+    transition: all .2s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    &:checked {
+      &:after {
+        color: #000;
+      }
+    }
+  }
+  &::after {
+    background-position: center;
+    border: 5px solid transparent;
+    border-top-color: #a2a2a2;
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    margin-top: -2px;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    bottom: 0;
+    pointer-events: none;
+  }
+}
+select::-ms-expand {
+  visibility: hidden;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .custom-select select {
+    padding-right: 30px;
   }
 }
 

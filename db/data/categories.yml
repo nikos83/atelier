@@ -1,0 +1,44 @@
+category_001:
+  id: 1
+  name: thriller
+  similar_categories: [horror, mystery, action]
+category_002:
+  id: 2
+  name: horror
+  similar_categories: [thriller, mystery]
+category_003:
+  id: 3
+  name: mystery
+  similar_categories: [thriller, horror, action]
+category_004:
+  id: 4
+  name: action
+  similar_categories: [thriller, mystery]
+category_005:
+  id: 5
+  name: science
+  similar_categories: [math, encyclopedias]
+category_006:
+  id: 6
+  name: math
+  similar_categories: [science]
+category_007:
+  id: 7
+  name: encyclopedias
+  similar_categories: [science]
+category_008:
+  id: 8
+  name: history
+  similar_categories: [journals, biographies, autobiographies]
+category_009:
+  id: 9
+  name: journals
+  similar_categories: [biographies, autobiographies]
+category_010:
+  id: 10
+  name: biographies
+  similar_categories: [journals, history, autobiographies]
+category_011:
+  id: 11
+  name: autobiographies
+  similar_categories: [journals, biographies, history]

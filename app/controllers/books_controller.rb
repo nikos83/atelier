@@ -45,6 +45,10 @@ end
     @category = ::Category.find_by(name: params[:name])
   end
 
+  def by_category
+    @category = ::Category.find_by(name: params[:name])
+  end
+
   private
 
   def filter_params
