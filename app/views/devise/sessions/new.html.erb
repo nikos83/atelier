@@ -24,7 +24,7 @@
     </div>
   <% end %>
   <%= link_to image_tag('btn_google_signin_dark_normal_web.png',onMouseover: 'this.src="/assets/btn_google_signin_light_normal_web.png"', onMouseout: 'this.src="/assets/btn_google_signin_light_disabled_web.png"'), user_google_oauth2_omniauth_authorize_path, {class: 'dock-item'} %><br />
-
+<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %><br />
 
 
 
