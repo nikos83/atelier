@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :reservations
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
+  
 end

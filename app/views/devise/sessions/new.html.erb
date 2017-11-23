@@ -23,6 +23,10 @@
       <%= f.submit "Log in", class: "btn" %>
     </div>
   <% end %>
+  <%= link_to image_tag('btn_google_signin_dark_normal_web.png',onMouseover: 'this.src="/assets/btn_google_signin_light_normal_web.png"', onMouseout: 'this.src="/assets/btn_google_signin_light_disabled_web.png"'), user_google_oauth2_omniauth_authorize_path, {class: 'dock-item'} %><br />
+
+
+
 
   <%= render "devise/shared/links" %>
 </div>

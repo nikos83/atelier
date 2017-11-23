@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   root to: "books#index"
 
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'books/filter', to: 'books#filter', as: 'filter'
   get 'users/:user_id/reservations', to: 'reservations#users_reservations', as: 'users_reservations'
   get 'google-isbn', to: 'google_books#show'
+  
 
   resources :books do
     collection do
