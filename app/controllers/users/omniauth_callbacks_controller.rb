@@ -11,7 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
     def facebook
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user = FacebookUserFinder.new(request.env["omniauth.auth"]).perform
 
     if @user.persisted?
     flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Facebook'
@@ -22,9 +22,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  def failure
-    redirect_to root_path
-  end
-    
 
 end
