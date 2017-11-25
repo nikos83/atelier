@@ -9,9 +9,8 @@ module Api
       private
 
       def books
-        Book.includes(:category).map do |book|
+        Book.all.map do |book|
           book.attributes.slice('title', 'isbn')
-            .merge(category_name: book.category_name)
             .symbolize_keys
         end
       end
