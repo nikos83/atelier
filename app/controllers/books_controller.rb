@@ -66,6 +66,7 @@ end
   end
 
   def load_books
+    @user = current_user
     @books = Book.all
   end
 
