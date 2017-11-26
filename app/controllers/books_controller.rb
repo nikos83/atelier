@@ -49,8 +49,14 @@ end
   private
   def adult?
     @user = current_user
-    (Time.now.year - @user.birghtday.year)>100
+    (Time.now.year - @user.birghtday.year)>19
   end
+  def for_grownups?
+    @book = Book.find(params[:id])
+    @book.category.for_grownups?
+  end
+  
+  
 
   def filter_params
     permitted_params
@@ -64,7 +70,7 @@ end
 
   def category
     @book = Book.find(params[:id])
-    Category.find_by(name: permitted_params[:category_name])
+    @category = Category.find_by(name: permitted_params[:category_name])
   end
 
   def load_books
@@ -73,12 +79,11 @@ end
   end
 
   def load_book
-    if adult?
-    @book = Book.find(params[:id])
+    if !adult? && for_grownups?
+      redirect_to root_path
     else
-    redirect_to root_path
+      @book = Book.find(params[:id])
     end
-  
   end
 
   def new_book
