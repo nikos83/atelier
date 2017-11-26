@@ -13,7 +13,7 @@
           <tr>
             <td><%= book.title %></td>
             <td><%= book.isbn %></td>
-            <td><%= book.category_name %></td>
+            <td><%= link_to book.category_name, category_name_books_path(book.category_name) %></td>
             <td><%= link_to('show', book_path(book.id)) %></td>
           </tr>
         <% end %>
