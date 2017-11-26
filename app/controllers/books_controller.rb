@@ -47,6 +47,10 @@ end
 
 
   private
+  def adult?
+    @user = current_user
+    (Time.now.year - @user.birghtday.year)>100
+  end
 
   def filter_params
     permitted_params
@@ -69,7 +73,12 @@ end
   end
 
   def load_book
+    if adult?
     @book = Book.find(params[:id])
+    else
+    redirect_to root_path
+    end
+  
   end
 
   def new_book

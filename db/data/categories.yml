@@ -6,6 +6,7 @@ category_002:
   id: 2
   name: horror
   similar_categories: [thriller, mystery]
+  for_grownups: true
 category_003:
   id: 3
   name: mystery
@@ -42,3 +43,8 @@ category_011:
   id: 11
   name: autobiographies
   similar_categories: [journals, biographies, history]
+category_12:
+  id: 12
+  name: porn
+  similar_categories: [horror]
+  for_grownups: true
