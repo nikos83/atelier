@@ -80,7 +80,7 @@ end
 
   def load_book
     if !adult? && for_grownups?
-      redirect_to root_path
+      redirect_to root_path, alert: "You must be an Adult!"
     else
       @book = Book.find(params[:id])
     end
