@@ -59,6 +59,7 @@ end
   end
 
   def category
+    @book = Book.find(params[:id])
     Category.find_by(name: permitted_params[:category_name])
   end
 

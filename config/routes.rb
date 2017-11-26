@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :books do
     collection do
-      get 'by_category/:name', action: :by_category
+      get 'by_category/:name', action: :by_category, as: 'category_name'
     end
   end
 
