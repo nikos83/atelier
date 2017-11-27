@@ -45,11 +45,18 @@ end
     @category = ::Category.find_by(name: params[:name])
   end
 
-  def by_category
-    @category = ::Category.find_by(name: params[:name])
-  end
 
   private
+  def adult?
+    @user = current_user
+    (Time.now.year - @user.birghtday.year)>19
+  end
+  def for_grownups?
+    @book = Book.find(params[:id])
+    @book.category.for_grownups?
+  end
+  
+  
 
   def filter_params
     permitted_params
@@ -62,15 +69,21 @@ end
   end
 
   def category
-    Category.find_by(name: permitted_params[:category_name])
+    @book = Book.find(params[:id])
+    @category = Category.find_by(name: permitted_params[:category_name])
   end
 
   def load_books
+    @user = current_user
     @books = Book.all
   end
 
   def load_book
-    @book = Book.find(params[:id])
+    if !adult? && for_grownups?
+      redirect_to root_path, alert: "You must be an Adult!"
+    else
+      @book = Book.find(params[:id])
+    end
   end
 
   def new_book

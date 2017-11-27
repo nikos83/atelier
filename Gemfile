@@ -19,6 +19,12 @@ gem 'httparty'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'sidekiq'
 gem 'active_hash'
+#social logins
+#gem 'omniauth-twitter'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
+gem 'a9n'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,0 +1,4514 @@
+/*
+ * easy-autocomplete
+ * jQuery plugin for autocompletion
+ * 
+ * @author Łukasz Pawełczak (http://github.com/pawelczak)
+ * @version 1.3.5
+ * Copyright  License: 
+ */
+
+
+.easy-autocomplete {
+  position: relative;
+}
+.easy-autocomplete input {
+  border-color: #ccc;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  color: #555;
+  float: none;
+  padding: 6px 12px;
+}
+.easy-autocomplete input:hover, .easy-autocomplete input:focus {
+  box-shadow: none;
+}
+.easy-autocomplete a {
+  display: block;
+}
+.easy-autocomplete.eac-blue-light input:hover, .easy-autocomplete.eac-blue-light input:focus {
+  border-color: #66afe9;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.easy-autocomplete.eac-blue-light ul {
+  border-color: #66afe9;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.easy-autocomplete.eac-blue-light ul li, .easy-autocomplete.eac-blue-light ul .eac-category {
+  border-color: #66afe9;
+}
+.easy-autocomplete.eac-blue-light ul li.selected, .easy-autocomplete.eac-blue-light ul .eac-category.selected {
+  background-color: #ecf5fc;
+}
+.easy-autocomplete.eac-green-light input:hover, .easy-autocomplete.eac-green-light input:focus {
+  border-color: #41DB00;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(146, 237, 107, 0.6);
+}
+.easy-autocomplete.eac-green-light ul {
+  border-color: #41DB00;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(146, 237, 107, 0.6);
+}
+.easy-autocomplete.eac-green-light ul li, .easy-autocomplete.eac-green-light ul .eac-category {
+  border-color: #41DB00;
+}
+.easy-autocomplete.eac-green-light ul li.selected, .easy-autocomplete.eac-green-light ul .eac-category.selected {
+  background-color: #9eff75;
+}
+.easy-autocomplete.eac-red-light input:hover, .easy-autocomplete.eac-red-light input:focus {
+  border-color: #ff5b5b;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 90, 90, 0.6);
+}
+.easy-autocomplete.eac-red-light ul {
+  border-color: #ff5b5b;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 90, 90, 0.6);
+}
+.easy-autocomplete.eac-red-light ul li, .easy-autocomplete.eac-red-light ul .eac-category {
+  border-color: #ff5b5b;
+}
+.easy-autocomplete.eac-red-light ul li.selected, .easy-autocomplete.eac-red-light ul .eac-category.selected {
+  background-color: #ff8e8e;
+}
+.easy-autocomplete.eac-yellow-light input:hover, .easy-autocomplete.eac-yellow-light input:focus {
+  border-color: #ffdb00;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 231, 84, 0.6);
+}
+.easy-autocomplete.eac-yellow-light ul {
+  border-color: #ffdb00;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 231, 84, 0.6);
+}
+.easy-autocomplete.eac-yellow-light ul li, .easy-autocomplete.eac-yellow-light ul .eac-category {
+  border-color: #ffdb00;
+}
+.easy-autocomplete.eac-yellow-light ul li.selected, .easy-autocomplete.eac-yellow-light ul .eac-category.selected {
+  background-color: #ffe233;
+}
+.easy-autocomplete.eac-dark-light input:hover, .easy-autocomplete.eac-dark-light input:focus {
+  border-color: #333;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(55, 55, 55, 0.6);
+}
+.easy-autocomplete.eac-dark-light ul {
+  border-color: #333;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(55, 55, 55, 0.6);
+}
+.easy-autocomplete.eac-dark-light ul li, .easy-autocomplete.eac-dark-light ul .eac-category {
+  border-color: #333;
+}
+.easy-autocomplete.eac-dark-light ul li.selected, .easy-autocomplete.eac-dark-light ul .eac-category.selected {
+  background-color: #4d4d4d;
+  color: #fff;
+}
+.easy-autocomplete.eac-dark {
+  color: #fff;
+}
+.easy-autocomplete.eac-dark input {
+  background-color: #404040;
+  border-radius: 4px;
+  box-shadow: 0;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-dark input:hover, .easy-autocomplete.eac-dark input:focus {
+  border-color: #333;
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-dark ul {
+  border-color: #333;
+}
+.easy-autocomplete.eac-dark ul li, .easy-autocomplete.eac-dark ul .eac-category {
+  background-color: #404040;
+  border-color: #333;
+}
+.easy-autocomplete.eac-dark ul li.selected, .easy-autocomplete.eac-dark ul .eac-category.selected {
+  background-color: #737373;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-dark-glass {
+  color: #fff;
+}
+.easy-autocomplete.eac-dark-glass input {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  box-shadow: 0;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-dark-glass input:hover, .easy-autocomplete.eac-dark-glass input:focus {
+  border-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-dark-glass ul {
+  border-color: rgba(0, 0, 0, 0.8);
+}
+.easy-autocomplete.eac-dark-glass ul li, .easy-autocomplete.eac-dark-glass ul .eac-category {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-color: rgba(0, 0, 0, 0.8);
+}
+.easy-autocomplete.eac-dark-glass ul li.selected, .easy-autocomplete.eac-dark-glass ul .eac-category.selected {
+  background-color: rgba(64, 64, 64, 0.8);
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-dark-glass ul li:last-child, .easy-autocomplete.eac-dark-glass ul .eac-category:last-child {
+  border-radius: 0 0 4px 4px;
+}
+.easy-autocomplete.eac-blue {
+  color: #fff;
+}
+.easy-autocomplete.eac-blue input {
+  background-color: #6d9ed1;
+  border-radius: 4px;
+  box-shadow: 0;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input::-webkit-input-placeholder {
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input:-moz-placeholder {
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input::-moz-placeholder {
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input:-ms-input-placeholder {
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input:hover, .easy-autocomplete.eac-blue input:focus {
+  border-color: #5A91CB;
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-blue ul {
+  border-color: #5A91CB;
+}
+.easy-autocomplete.eac-blue ul li, .easy-autocomplete.eac-blue ul .eac-category {
+  background-color: #6d9ed1;
+  border-color: #5A91CB;
+}
+.easy-autocomplete.eac-blue ul li.selected, .easy-autocomplete.eac-blue ul .eac-category.selected {
+  background-color: #94b8dd;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-yellow {
+  color: #333;
+}
+.easy-autocomplete.eac-yellow input {
+  background-color: #ffdb7e;
+  border-color: #333;
+  border-radius: 4px;
+  box-shadow: 0;
+  color: #333;
+}
+.easy-autocomplete.eac-yellow input:hover, .easy-autocomplete.eac-yellow input:focus {
+  border-color: #333;
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-yellow ul {
+  border-color: #333;
+}
+.easy-autocomplete.eac-yellow ul li, .easy-autocomplete.eac-yellow ul .eac-category {
+  background-color: #ffdb7e;
+  border-color: #333;
+}
+.easy-autocomplete.eac-yellow ul li.selected, .easy-autocomplete.eac-yellow ul .eac-category.selected {
+  background-color: #ffe9b1;
+  color: #333;
+}
+.easy-autocomplete.eac-purple {
+  color: #333;
+}
+.easy-autocomplete.eac-purple input {
+  background-color: #d6d1e7;
+  border-color: #b8afd5;
+  box-shadow: 0;
+  color: #333;
+}
+.easy-autocomplete.eac-purple input:hover, .easy-autocomplete.eac-purple input:focus {
+  border-color: #333;
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-purple ul {
+  border-color: #333;
+}
+.easy-autocomplete.eac-purple ul li, .easy-autocomplete.eac-purple ul .eac-category {
+  background-color: #d6d1e7;
+  border-color: #333;
+}
+.easy-autocomplete.eac-purple ul li.selected, .easy-autocomplete.eac-purple ul .eac-category.selected {
+  background-color: #ebe8f3;
+  color: #333;
+}
+.easy-autocomplete.eac-bootstrap input {
+  border-color: #ccc;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  color: #555;
+  padding: 6px 12px;
+}
+
+.easy-autocomplete-container {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+.easy-autocomplete-container ul {
+  background: none repeat scroll 0 0 #ffffff;
+  border-top: 1px dotted #ccc;
+  display: none;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  position: relative;
+  top: -1px;
+}
+.easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
+  background: inherit;
+  border-color: #ccc;
+  border-image: none;
+  border-style: solid;
+  border-width: 0 1px;
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 4px 12px;
+}
+.easy-autocomplete-container ul li:last-child {
+  border-radius: 0 0 2px 2px;
+  border-width: 0 1px 1px;
+}
+.easy-autocomplete-container ul li.selected {
+  background: none repeat scroll 0 0 #ebebeb;
+  cursor: pointer;
+}
+.easy-autocomplete-container ul li.selected div {
+  font-weight: normal;
+}
+.easy-autocomplete-container ul li div {
+  display: block;
+  font-weight: normal;
+  word-break: break-all;
+}
+.easy-autocomplete-container ul li b {
+  font-weight: bold;
+}
+.easy-autocomplete-container ul .eac-category {
+  font-color: #aaa;
+  font-style: italic;
+}
+
+.eac-description .eac-item span {
+  color: #aaa;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.eac-icon-left .eac-item img {
+  margin-right: 4px;
+  max-height: 30px;
+}
+
+.eac-icon-right .eac-item {
+  margin-top: 8px;
+  min-height: 24px;
+  position: relative;
+}
+.eac-icon-right .eac-item img {
+  margin-left: 4px;
+  max-height: 30px;
+  position: absolute;
+  right: -4px;
+  top: -8px;
+}
+
+/*# sourceMappingURL=easy-autocomplete.css.map */
+/*!
+ *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+/* FONT PATH
+ * -------------------------- */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url("/fonts/fontawesome-webfont.eot?v=4.7.0");
+  src: url("/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("/fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), url("/fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"), url("/fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"), url("/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 15, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* makes the font 33% larger relative to the icon container */
+/* line 24, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-lg {
+  font-size: 1.33333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+
+/* line 29, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-2x {
+  font-size: 2em;
+}
+
+/* line 32, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-3x {
+  font-size: 3em;
+}
+
+/* line 35, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-4x {
+  font-size: 4em;
+}
+
+/* line 38, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-5x {
+  font-size: 5em;
+}
+
+/* line 41, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fw {
+  width: 1.28571429em;
+  text-align: center;
+}
+
+/* line 45, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ul {
+  padding-left: 0;
+  margin-left: 2.14285714em;
+  list-style-type: none;
+}
+
+/* line 50, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ul > li {
+  position: relative;
+}
+
+/* line 53, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-li {
+  position: absolute;
+  left: -2.14285714em;
+  width: 2.14285714em;
+  top: 0.14285714em;
+  text-align: center;
+}
+
+/* line 60, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-li.fa-lg {
+  left: -1.85714286em;
+}
+
+/* line 63, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-border {
+  padding: .2em .25em .15em;
+  border: solid 0.08em #eeeeee;
+  border-radius: .1em;
+}
+
+/* line 68, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pull-left {
+  float: left;
+}
+
+/* line 71, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pull-right {
+  float: right;
+}
+
+/* line 74, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa.fa-pull-left {
+  margin-right: .3em;
+}
+
+/* line 77, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa.fa-pull-right {
+  margin-left: .3em;
+}
+
+/* Deprecated as of 4.4.0 */
+/* line 81, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.pull-right {
+  float: right;
+}
+
+/* line 84, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.pull-left {
+  float: left;
+}
+
+/* line 87, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa.pull-left {
+  margin-right: .3em;
+}
+
+/* line 90, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa.pull-right {
+  margin-left: .3em;
+}
+
+/* line 93, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+
+/* line 97, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+/* line 121, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+/* line 127, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+/* line 133, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+/* line 139, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+/* line 145, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+/* line 151, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical {
+  filter: none;
+}
+
+/* line 158, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+}
+
+/* line 166, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stack-1x,
+.fa-stack-2x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* line 173, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stack-1x {
+  line-height: inherit;
+}
+
+/* line 176, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stack-2x {
+  font-size: 2em;
+}
+
+/* line 179, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-inverse {
+  color: #ffffff;
+}
+
+/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
+   readers do not read off random characters that represent icons */
+/* line 184, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-glass:before {
+  content: "\f000";
+}
+
+/* line 187, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-music:before {
+  content: "\f001";
+}
+
+/* line 190, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-search:before {
+  content: "\f002";
+}
+
+/* line 193, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-envelope-o:before {
+  content: "\f003";
+}
+
+/* line 196, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-heart:before {
+  content: "\f004";
+}
+
+/* line 199, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-star:before {
+  content: "\f005";
+}
+
+/* line 202, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-star-o:before {
+  content: "\f006";
+}
+
+/* line 205, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-user:before {
+  content: "\f007";
+}
+
+/* line 208, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-film:before {
+  content: "\f008";
+}
+
+/* line 211, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-th-large:before {
+  content: "\f009";
+}
+
+/* line 214, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-th:before {
+  content: "\f00a";
+}
+
+/* line 217, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-th-list:before {
+  content: "\f00b";
+}
+
+/* line 220, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-check:before {
+  content: "\f00c";
+}
+
+/* line 223, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-remove:before,
+.fa-close:before,
+.fa-times:before {
+  content: "\f00d";
+}
+
+/* line 228, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-search-plus:before {
+  content: "\f00e";
+}
+
+/* line 231, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-search-minus:before {
+  content: "\f010";
+}
+
+/* line 234, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-power-off:before {
+  content: "\f011";
+}
+
+/* line 237, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-signal:before {
+  content: "\f012";
+}
+
+/* line 240, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-gear:before,
+.fa-cog:before {
+  content: "\f013";
+}
+
+/* line 244, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-trash-o:before {
+  content: "\f014";
+}
+
+/* line 247, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-home:before {
+  content: "\f015";
+}
+
+/* line 250, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-o:before {
+  content: "\f016";
+}
+
+/* line 253, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-clock-o:before {
+  content: "\f017";
+}
+
+/* line 256, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-road:before {
+  content: "\f018";
+}
+
+/* line 259, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-download:before {
+  content: "\f019";
+}
+
+/* line 262, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-circle-o-down:before {
+  content: "\f01a";
+}
+
+/* line 265, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-circle-o-up:before {
+  content: "\f01b";
+}
+
+/* line 268, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-inbox:before {
+  content: "\f01c";
+}
+
+/* line 271, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-play-circle-o:before {
+  content: "\f01d";
+}
+
+/* line 274, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-rotate-right:before,
+.fa-repeat:before {
+  content: "\f01e";
+}
+
+/* line 278, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-refresh:before {
+  content: "\f021";
+}
+
+/* line 281, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-list-alt:before {
+  content: "\f022";
+}
+
+/* line 284, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-lock:before {
+  content: "\f023";
+}
+
+/* line 287, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-flag:before {
+  content: "\f024";
+}
+
+/* line 290, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-headphones:before {
+  content: "\f025";
+}
+
+/* line 293, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-volume-off:before {
+  content: "\f026";
+}
+
+/* line 296, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-volume-down:before {
+  content: "\f027";
+}
+
+/* line 299, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-volume-up:before {
+  content: "\f028";
+}
+
+/* line 302, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-qrcode:before {
+  content: "\f029";
+}
+
+/* line 305, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-barcode:before {
+  content: "\f02a";
+}
+
+/* line 308, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tag:before {
+  content: "\f02b";
+}
+
+/* line 311, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tags:before {
+  content: "\f02c";
+}
+
+/* line 314, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-book:before {
+  content: "\f02d";
+}
+
+/* line 317, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bookmark:before {
+  content: "\f02e";
+}
+
+/* line 320, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-print:before {
+  content: "\f02f";
+}
+
+/* line 323, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-camera:before {
+  content: "\f030";
+}
+
+/* line 326, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-font:before {
+  content: "\f031";
+}
+
+/* line 329, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bold:before {
+  content: "\f032";
+}
+
+/* line 332, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-italic:before {
+  content: "\f033";
+}
+
+/* line 335, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-text-height:before {
+  content: "\f034";
+}
+
+/* line 338, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-text-width:before {
+  content: "\f035";
+}
+
+/* line 341, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-align-left:before {
+  content: "\f036";
+}
+
+/* line 344, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-align-center:before {
+  content: "\f037";
+}
+
+/* line 347, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-align-right:before {
+  content: "\f038";
+}
+
+/* line 350, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-align-justify:before {
+  content: "\f039";
+}
+
+/* line 353, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-list:before {
+  content: "\f03a";
+}
+
+/* line 356, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-dedent:before,
+.fa-outdent:before {
+  content: "\f03b";
+}
+
+/* line 360, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-indent:before {
+  content: "\f03c";
+}
+
+/* line 363, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-video-camera:before {
+  content: "\f03d";
+}
+
+/* line 366, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-photo:before,
+.fa-image:before,
+.fa-picture-o:before {
+  content: "\f03e";
+}
+
+/* line 371, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pencil:before {
+  content: "\f040";
+}
+
+/* line 374, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-map-marker:before {
+  content: "\f041";
+}
+
+/* line 377, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-adjust:before {
+  content: "\f042";
+}
+
+/* line 380, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tint:before {
+  content: "\f043";
+}
+
+/* line 383, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-edit:before,
+.fa-pencil-square-o:before {
+  content: "\f044";
+}
+
+/* line 387, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-share-square-o:before {
+  content: "\f045";
+}
+
+/* line 390, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-check-square-o:before {
+  content: "\f046";
+}
+
+/* line 393, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrows:before {
+  content: "\f047";
+}
+
+/* line 396, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-step-backward:before {
+  content: "\f048";
+}
+
+/* line 399, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fast-backward:before {
+  content: "\f049";
+}
+
+/* line 402, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-backward:before {
+  content: "\f04a";
+}
+
+/* line 405, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-play:before {
+  content: "\f04b";
+}
+
+/* line 408, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pause:before {
+  content: "\f04c";
+}
+
+/* line 411, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stop:before {
+  content: "\f04d";
+}
+
+/* line 414, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-forward:before {
+  content: "\f04e";
+}
+
+/* line 417, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fast-forward:before {
+  content: "\f050";
+}
+
+/* line 420, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-step-forward:before {
+  content: "\f051";
+}
+
+/* line 423, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-eject:before {
+  content: "\f052";
+}
+
+/* line 426, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chevron-left:before {
+  content: "\f053";
+}
+
+/* line 429, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chevron-right:before {
+  content: "\f054";
+}
+
+/* line 432, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-plus-circle:before {
+  content: "\f055";
+}
+
+/* line 435, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-minus-circle:before {
+  content: "\f056";
+}
+
+/* line 438, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-times-circle:before {
+  content: "\f057";
+}
+
+/* line 441, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-check-circle:before {
+  content: "\f058";
+}
+
+/* line 444, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-question-circle:before {
+  content: "\f059";
+}
+
+/* line 447, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-info-circle:before {
+  content: "\f05a";
+}
+
+/* line 450, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-crosshairs:before {
+  content: "\f05b";
+}
+
+/* line 453, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-times-circle-o:before {
+  content: "\f05c";
+}
+
+/* line 456, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-check-circle-o:before {
+  content: "\f05d";
+}
+
+/* line 459, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ban:before {
+  content: "\f05e";
+}
+
+/* line 462, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-left:before {
+  content: "\f060";
+}
+
+/* line 465, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-right:before {
+  content: "\f061";
+}
+
+/* line 468, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-up:before {
+  content: "\f062";
+}
+
+/* line 471, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-down:before {
+  content: "\f063";
+}
+
+/* line 474, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mail-forward:before,
+.fa-share:before {
+  content: "\f064";
+}
+
+/* line 478, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-expand:before {
+  content: "\f065";
+}
+
+/* line 481, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-compress:before {
+  content: "\f066";
+}
+
+/* line 484, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-plus:before {
+  content: "\f067";
+}
+
+/* line 487, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-minus:before {
+  content: "\f068";
+}
+
+/* line 490, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-asterisk:before {
+  content: "\f069";
+}
+
+/* line 493, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-exclamation-circle:before {
+  content: "\f06a";
+}
+
+/* line 496, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-gift:before {
+  content: "\f06b";
+}
+
+/* line 499, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-leaf:before {
+  content: "\f06c";
+}
+
+/* line 502, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fire:before {
+  content: "\f06d";
+}
+
+/* line 505, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-eye:before {
+  content: "\f06e";
+}
+
+/* line 508, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-eye-slash:before {
+  content: "\f070";
+}
+
+/* line 511, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-warning:before,
+.fa-exclamation-triangle:before {
+  content: "\f071";
+}
+
+/* line 515, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-plane:before {
+  content: "\f072";
+}
+
+/* line 518, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-calendar:before {
+  content: "\f073";
+}
+
+/* line 521, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-random:before {
+  content: "\f074";
+}
+
+/* line 524, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-comment:before {
+  content: "\f075";
+}
+
+/* line 527, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-magnet:before {
+  content: "\f076";
+}
+
+/* line 530, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chevron-up:before {
+  content: "\f077";
+}
+
+/* line 533, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chevron-down:before {
+  content: "\f078";
+}
+
+/* line 536, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-retweet:before {
+  content: "\f079";
+}
+
+/* line 539, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-shopping-cart:before {
+  content: "\f07a";
+}
+
+/* line 542, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-folder:before {
+  content: "\f07b";
+}
+
+/* line 545, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-folder-open:before {
+  content: "\f07c";
+}
+
+/* line 548, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrows-v:before {
+  content: "\f07d";
+}
+
+/* line 551, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrows-h:before {
+  content: "\f07e";
+}
+
+/* line 554, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bar-chart-o:before,
+.fa-bar-chart:before {
+  content: "\f080";
+}
+
+/* line 558, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-twitter-square:before {
+  content: "\f081";
+}
+
+/* line 561, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-facebook-square:before {
+  content: "\f082";
+}
+
+/* line 564, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-camera-retro:before {
+  content: "\f083";
+}
+
+/* line 567, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-key:before {
+  content: "\f084";
+}
+
+/* line 570, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-gears:before,
+.fa-cogs:before {
+  content: "\f085";
+}
+
+/* line 574, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-comments:before {
+  content: "\f086";
+}
+
+/* line 577, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thumbs-o-up:before {
+  content: "\f087";
+}
+
+/* line 580, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thumbs-o-down:before {
+  content: "\f088";
+}
+
+/* line 583, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-star-half:before {
+  content: "\f089";
+}
+
+/* line 586, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-heart-o:before {
+  content: "\f08a";
+}
+
+/* line 589, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sign-out:before {
+  content: "\f08b";
+}
+
+/* line 592, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-linkedin-square:before {
+  content: "\f08c";
+}
+
+/* line 595, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thumb-tack:before {
+  content: "\f08d";
+}
+
+/* line 598, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-external-link:before {
+  content: "\f08e";
+}
+
+/* line 601, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sign-in:before {
+  content: "\f090";
+}
+
+/* line 604, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-trophy:before {
+  content: "\f091";
+}
+
+/* line 607, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-github-square:before {
+  content: "\f092";
+}
+
+/* line 610, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-upload:before {
+  content: "\f093";
+}
+
+/* line 613, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-lemon-o:before {
+  content: "\f094";
+}
+
+/* line 616, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-phone:before {
+  content: "\f095";
+}
+
+/* line 619, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-square-o:before {
+  content: "\f096";
+}
+
+/* line 622, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bookmark-o:before {
+  content: "\f097";
+}
+
+/* line 625, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-phone-square:before {
+  content: "\f098";
+}
+
+/* line 628, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-twitter:before {
+  content: "\f099";
+}
+
+/* line 631, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-facebook-f:before,
+.fa-facebook:before {
+  content: "\f09a";
+}
+
+/* line 635, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-github:before {
+  content: "\f09b";
+}
+
+/* line 638, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-unlock:before {
+  content: "\f09c";
+}
+
+/* line 641, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-credit-card:before {
+  content: "\f09d";
+}
+
+/* line 644, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-feed:before,
+.fa-rss:before {
+  content: "\f09e";
+}
+
+/* line 648, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hdd-o:before {
+  content: "\f0a0";
+}
+
+/* line 651, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bullhorn:before {
+  content: "\f0a1";
+}
+
+/* line 654, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bell:before {
+  content: "\f0f3";
+}
+
+/* line 657, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-certificate:before {
+  content: "\f0a3";
+}
+
+/* line 660, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-o-right:before {
+  content: "\f0a4";
+}
+
+/* line 663, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-o-left:before {
+  content: "\f0a5";
+}
+
+/* line 666, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-o-up:before {
+  content: "\f0a6";
+}
+
+/* line 669, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-o-down:before {
+  content: "\f0a7";
+}
+
+/* line 672, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-circle-left:before {
+  content: "\f0a8";
+}
+
+/* line 675, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-circle-right:before {
+  content: "\f0a9";
+}
+
+/* line 678, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-circle-up:before {
+  content: "\f0aa";
+}
+
+/* line 681, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-circle-down:before {
+  content: "\f0ab";
+}
+
+/* line 684, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-globe:before {
+  content: "\f0ac";
+}
+
+/* line 687, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wrench:before {
+  content: "\f0ad";
+}
+
+/* line 690, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tasks:before {
+  content: "\f0ae";
+}
+
+/* line 693, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-filter:before {
+  content: "\f0b0";
+}
+
+/* line 696, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-briefcase:before {
+  content: "\f0b1";
+}
+
+/* line 699, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrows-alt:before {
+  content: "\f0b2";
+}
+
+/* line 702, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-group:before,
+.fa-users:before {
+  content: "\f0c0";
+}
+
+/* line 706, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chain:before,
+.fa-link:before {
+  content: "\f0c1";
+}
+
+/* line 710, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cloud:before {
+  content: "\f0c2";
+}
+
+/* line 713, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-flask:before {
+  content: "\f0c3";
+}
+
+/* line 716, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cut:before,
+.fa-scissors:before {
+  content: "\f0c4";
+}
+
+/* line 720, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-copy:before,
+.fa-files-o:before {
+  content: "\f0c5";
+}
+
+/* line 724, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-paperclip:before {
+  content: "\f0c6";
+}
+
+/* line 727, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-save:before,
+.fa-floppy-o:before {
+  content: "\f0c7";
+}
+
+/* line 731, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-square:before {
+  content: "\f0c8";
+}
+
+/* line 734, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-navicon:before,
+.fa-reorder:before,
+.fa-bars:before {
+  content: "\f0c9";
+}
+
+/* line 739, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-list-ul:before {
+  content: "\f0ca";
+}
+
+/* line 742, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-list-ol:before {
+  content: "\f0cb";
+}
+
+/* line 745, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-strikethrough:before {
+  content: "\f0cc";
+}
+
+/* line 748, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-underline:before {
+  content: "\f0cd";
+}
+
+/* line 751, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-table:before {
+  content: "\f0ce";
+}
+
+/* line 754, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-magic:before {
+  content: "\f0d0";
+}
+
+/* line 757, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-truck:before {
+  content: "\f0d1";
+}
+
+/* line 760, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pinterest:before {
+  content: "\f0d2";
+}
+
+/* line 763, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pinterest-square:before {
+  content: "\f0d3";
+}
+
+/* line 766, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-google-plus-square:before {
+  content: "\f0d4";
+}
+
+/* line 769, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-google-plus:before {
+  content: "\f0d5";
+}
+
+/* line 772, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-money:before {
+  content: "\f0d6";
+}
+
+/* line 775, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-caret-down:before {
+  content: "\f0d7";
+}
+
+/* line 778, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-caret-up:before {
+  content: "\f0d8";
+}
+
+/* line 781, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-caret-left:before {
+  content: "\f0d9";
+}
+
+/* line 784, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-caret-right:before {
+  content: "\f0da";
+}
+
+/* line 787, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-columns:before {
+  content: "\f0db";
+}
+
+/* line 790, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-unsorted:before,
+.fa-sort:before {
+  content: "\f0dc";
+}
+
+/* line 794, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sort-down:before,
+.fa-sort-desc:before {
+  content: "\f0dd";
+}
+
+/* line 798, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sort-up:before,
+.fa-sort-asc:before {
+  content: "\f0de";
+}
+
+/* line 802, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-envelope:before {
+  content: "\f0e0";
+}
+
+/* line 805, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-linkedin:before {
+  content: "\f0e1";
+}
+
+/* line 808, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-rotate-left:before,
+.fa-undo:before {
+  content: "\f0e2";
+}
+
+/* line 812, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-legal:before,
+.fa-gavel:before {
+  content: "\f0e3";
+}
+
+/* line 816, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-dashboard:before,
+.fa-tachometer:before {
+  content: "\f0e4";
+}
+
+/* line 820, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-comment-o:before {
+  content: "\f0e5";
+}
+
+/* line 823, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-comments-o:before {
+  content: "\f0e6";
+}
+
+/* line 826, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-flash:before,
+.fa-bolt:before {
+  content: "\f0e7";
+}
+
+/* line 830, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sitemap:before {
+  content: "\f0e8";
+}
+
+/* line 833, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-umbrella:before {
+  content: "\f0e9";
+}
+
+/* line 836, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-paste:before,
+.fa-clipboard:before {
+  content: "\f0ea";
+}
+
+/* line 840, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-lightbulb-o:before {
+  content: "\f0eb";
+}
+
+/* line 843, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-exchange:before {
+  content: "\f0ec";
+}
+
+/* line 846, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cloud-download:before {
+  content: "\f0ed";
+}
+
+/* line 849, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cloud-upload:before {
+  content: "\f0ee";
+}
+
+/* line 852, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-user-md:before {
+  content: "\f0f0";
+}
+
+/* line 855, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stethoscope:before {
+  content: "\f0f1";
+}
+
+/* line 858, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-suitcase:before {
+  content: "\f0f2";
+}
+
+/* line 861, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bell-o:before {
+  content: "\f0a2";
+}
+
+/* line 864, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-coffee:before {
+  content: "\f0f4";
+}
+
+/* line 867, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cutlery:before {
+  content: "\f0f5";
+}
+
+/* line 870, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-text-o:before {
+  content: "\f0f6";
+}
+
+/* line 873, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-building-o:before {
+  content: "\f0f7";
+}
+
+/* line 876, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hospital-o:before {
+  content: "\f0f8";
+}
+
+/* line 879, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ambulance:before {
+  content: "\f0f9";
+}
+
+/* line 882, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-medkit:before {
+  content: "\f0fa";
+}
+
+/* line 885, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fighter-jet:before {
+  content: "\f0fb";
+}
+
+/* line 888, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-beer:before {
+  content: "\f0fc";
+}
+
+/* line 891, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-h-square:before {
+  content: "\f0fd";
+}
+
+/* line 894, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-plus-square:before {
+  content: "\f0fe";
+}
+
+/* line 897, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-angle-double-left:before {
+  content: "\f100";
+}
+
+/* line 900, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-angle-double-right:before {
+  content: "\f101";
+}
+
+/* line 903, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-angle-double-up:before {
+  content: "\f102";
+}
+
+/* line 906, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-angle-double-down:before {
+  content: "\f103";
+}
+
+/* line 909, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-angle-left:before {
+  content: "\f104";
+}
+
+/* line 912, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-angle-right:before {
+  content: "\f105";
+}
+
+/* line 915, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-angle-up:before {
+  content: "\f106";
+}
+
+/* line 918, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-angle-down:before {
+  content: "\f107";
+}
+
+/* line 921, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-desktop:before {
+  content: "\f108";
+}
+
+/* line 924, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-laptop:before {
+  content: "\f109";
+}
+
+/* line 927, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tablet:before {
+  content: "\f10a";
+}
+
+/* line 930, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mobile-phone:before,
+.fa-mobile:before {
+  content: "\f10b";
+}
+
+/* line 934, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-circle-o:before {
+  content: "\f10c";
+}
+
+/* line 937, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-quote-left:before {
+  content: "\f10d";
+}
+
+/* line 940, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-quote-right:before {
+  content: "\f10e";
+}
+
+/* line 943, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-spinner:before {
+  content: "\f110";
+}
+
+/* line 946, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-circle:before {
+  content: "\f111";
+}
+
+/* line 949, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mail-reply:before,
+.fa-reply:before {
+  content: "\f112";
+}
+
+/* line 953, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-github-alt:before {
+  content: "\f113";
+}
+
+/* line 956, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-folder-o:before {
+  content: "\f114";
+}
+
+/* line 959, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-folder-open-o:before {
+  content: "\f115";
+}
+
+/* line 962, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-smile-o:before {
+  content: "\f118";
+}
+
+/* line 965, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-frown-o:before {
+  content: "\f119";
+}
+
+/* line 968, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-meh-o:before {
+  content: "\f11a";
+}
+
+/* line 971, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-gamepad:before {
+  content: "\f11b";
+}
+
+/* line 974, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-keyboard-o:before {
+  content: "\f11c";
+}
+
+/* line 977, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-flag-o:before {
+  content: "\f11d";
+}
+
+/* line 980, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-flag-checkered:before {
+  content: "\f11e";
+}
+
+/* line 983, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-terminal:before {
+  content: "\f120";
+}
+
+/* line 986, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-code:before {
+  content: "\f121";
+}
+
+/* line 989, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mail-reply-all:before,
+.fa-reply-all:before {
+  content: "\f122";
+}
+
+/* line 993, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-star-half-empty:before,
+.fa-star-half-full:before,
+.fa-star-half-o:before {
+  content: "\f123";
+}
+
+/* line 998, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-location-arrow:before {
+  content: "\f124";
+}
+
+/* line 1001, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-crop:before {
+  content: "\f125";
+}
+
+/* line 1004, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-code-fork:before {
+  content: "\f126";
+}
+
+/* line 1007, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-unlink:before,
+.fa-chain-broken:before {
+  content: "\f127";
+}
+
+/* line 1011, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-question:before {
+  content: "\f128";
+}
+
+/* line 1014, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-info:before {
+  content: "\f129";
+}
+
+/* line 1017, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-exclamation:before {
+  content: "\f12a";
+}
+
+/* line 1020, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-superscript:before {
+  content: "\f12b";
+}
+
+/* line 1023, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-subscript:before {
+  content: "\f12c";
+}
+
+/* line 1026, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-eraser:before {
+  content: "\f12d";
+}
+
+/* line 1029, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-puzzle-piece:before {
+  content: "\f12e";
+}
+
+/* line 1032, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-microphone:before {
+  content: "\f130";
+}
+
+/* line 1035, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-microphone-slash:before {
+  content: "\f131";
+}
+
+/* line 1038, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-shield:before {
+  content: "\f132";
+}
+
+/* line 1041, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-calendar-o:before {
+  content: "\f133";
+}
+
+/* line 1044, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fire-extinguisher:before {
+  content: "\f134";
+}
+
+/* line 1047, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-rocket:before {
+  content: "\f135";
+}
+
+/* line 1050, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-maxcdn:before {
+  content: "\f136";
+}
+
+/* line 1053, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chevron-circle-left:before {
+  content: "\f137";
+}
+
+/* line 1056, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chevron-circle-right:before {
+  content: "\f138";
+}
+
+/* line 1059, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chevron-circle-up:before {
+  content: "\f139";
+}
+
+/* line 1062, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chevron-circle-down:before {
+  content: "\f13a";
+}
+
+/* line 1065, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-html5:before {
+  content: "\f13b";
+}
+
+/* line 1068, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-css3:before {
+  content: "\f13c";
+}
+
+/* line 1071, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-anchor:before {
+  content: "\f13d";
+}
+
+/* line 1074, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-unlock-alt:before {
+  content: "\f13e";
+}
+
+/* line 1077, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bullseye:before {
+  content: "\f140";
+}
+
+/* line 1080, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ellipsis-h:before {
+  content: "\f141";
+}
+
+/* line 1083, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ellipsis-v:before {
+  content: "\f142";
+}
+
+/* line 1086, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-rss-square:before {
+  content: "\f143";
+}
+
+/* line 1089, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-play-circle:before {
+  content: "\f144";
+}
+
+/* line 1092, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ticket:before {
+  content: "\f145";
+}
+
+/* line 1095, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-minus-square:before {
+  content: "\f146";
+}
+
+/* line 1098, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-minus-square-o:before {
+  content: "\f147";
+}
+
+/* line 1101, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-level-up:before {
+  content: "\f148";
+}
+
+/* line 1104, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-level-down:before {
+  content: "\f149";
+}
+
+/* line 1107, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-check-square:before {
+  content: "\f14a";
+}
+
+/* line 1110, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pencil-square:before {
+  content: "\f14b";
+}
+
+/* line 1113, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-external-link-square:before {
+  content: "\f14c";
+}
+
+/* line 1116, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-share-square:before {
+  content: "\f14d";
+}
+
+/* line 1119, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-compass:before {
+  content: "\f14e";
+}
+
+/* line 1122, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-toggle-down:before,
+.fa-caret-square-o-down:before {
+  content: "\f150";
+}
+
+/* line 1126, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-toggle-up:before,
+.fa-caret-square-o-up:before {
+  content: "\f151";
+}
+
+/* line 1130, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-toggle-right:before,
+.fa-caret-square-o-right:before {
+  content: "\f152";
+}
+
+/* line 1134, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-euro:before,
+.fa-eur:before {
+  content: "\f153";
+}
+
+/* line 1138, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-gbp:before {
+  content: "\f154";
+}
+
+/* line 1141, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-dollar:before,
+.fa-usd:before {
+  content: "\f155";
+}
+
+/* line 1145, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-rupee:before,
+.fa-inr:before {
+  content: "\f156";
+}
+
+/* line 1149, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cny:before,
+.fa-rmb:before,
+.fa-yen:before,
+.fa-jpy:before {
+  content: "\f157";
+}
+
+/* line 1155, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ruble:before,
+.fa-rouble:before,
+.fa-rub:before {
+  content: "\f158";
+}
+
+/* line 1160, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-won:before,
+.fa-krw:before {
+  content: "\f159";
+}
+
+/* line 1164, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bitcoin:before,
+.fa-btc:before {
+  content: "\f15a";
+}
+
+/* line 1168, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file:before {
+  content: "\f15b";
+}
+
+/* line 1171, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-text:before {
+  content: "\f15c";
+}
+
+/* line 1174, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sort-alpha-asc:before {
+  content: "\f15d";
+}
+
+/* line 1177, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sort-alpha-desc:before {
+  content: "\f15e";
+}
+
+/* line 1180, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sort-amount-asc:before {
+  content: "\f160";
+}
+
+/* line 1183, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sort-amount-desc:before {
+  content: "\f161";
+}
+
+/* line 1186, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sort-numeric-asc:before {
+  content: "\f162";
+}
+
+/* line 1189, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sort-numeric-desc:before {
+  content: "\f163";
+}
+
+/* line 1192, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thumbs-up:before {
+  content: "\f164";
+}
+
+/* line 1195, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thumbs-down:before {
+  content: "\f165";
+}
+
+/* line 1198, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-youtube-square:before {
+  content: "\f166";
+}
+
+/* line 1201, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-youtube:before {
+  content: "\f167";
+}
+
+/* line 1204, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-xing:before {
+  content: "\f168";
+}
+
+/* line 1207, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-xing-square:before {
+  content: "\f169";
+}
+
+/* line 1210, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-youtube-play:before {
+  content: "\f16a";
+}
+
+/* line 1213, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-dropbox:before {
+  content: "\f16b";
+}
+
+/* line 1216, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stack-overflow:before {
+  content: "\f16c";
+}
+
+/* line 1219, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-instagram:before {
+  content: "\f16d";
+}
+
+/* line 1222, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-flickr:before {
+  content: "\f16e";
+}
+
+/* line 1225, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-adn:before {
+  content: "\f170";
+}
+
+/* line 1228, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bitbucket:before {
+  content: "\f171";
+}
+
+/* line 1231, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bitbucket-square:before {
+  content: "\f172";
+}
+
+/* line 1234, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tumblr:before {
+  content: "\f173";
+}
+
+/* line 1237, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tumblr-square:before {
+  content: "\f174";
+}
+
+/* line 1240, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-long-arrow-down:before {
+  content: "\f175";
+}
+
+/* line 1243, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-long-arrow-up:before {
+  content: "\f176";
+}
+
+/* line 1246, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-long-arrow-left:before {
+  content: "\f177";
+}
+
+/* line 1249, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-long-arrow-right:before {
+  content: "\f178";
+}
+
+/* line 1252, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-apple:before {
+  content: "\f179";
+}
+
+/* line 1255, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-windows:before {
+  content: "\f17a";
+}
+
+/* line 1258, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-android:before {
+  content: "\f17b";
+}
+
+/* line 1261, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-linux:before {
+  content: "\f17c";
+}
+
+/* line 1264, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-dribbble:before {
+  content: "\f17d";
+}
+
+/* line 1267, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-skype:before {
+  content: "\f17e";
+}
+
+/* line 1270, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-foursquare:before {
+  content: "\f180";
+}
+
+/* line 1273, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-trello:before {
+  content: "\f181";
+}
+
+/* line 1276, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-female:before {
+  content: "\f182";
+}
+
+/* line 1279, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-male:before {
+  content: "\f183";
+}
+
+/* line 1282, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-gittip:before,
+.fa-gratipay:before {
+  content: "\f184";
+}
+
+/* line 1286, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sun-o:before {
+  content: "\f185";
+}
+
+/* line 1289, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-moon-o:before {
+  content: "\f186";
+}
+
+/* line 1292, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-archive:before {
+  content: "\f187";
+}
+
+/* line 1295, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bug:before {
+  content: "\f188";
+}
+
+/* line 1298, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-vk:before {
+  content: "\f189";
+}
+
+/* line 1301, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-weibo:before {
+  content: "\f18a";
+}
+
+/* line 1304, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-renren:before {
+  content: "\f18b";
+}
+
+/* line 1307, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pagelines:before {
+  content: "\f18c";
+}
+
+/* line 1310, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stack-exchange:before {
+  content: "\f18d";
+}
+
+/* line 1313, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-circle-o-right:before {
+  content: "\f18e";
+}
+
+/* line 1316, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-arrow-circle-o-left:before {
+  content: "\f190";
+}
+
+/* line 1319, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-toggle-left:before,
+.fa-caret-square-o-left:before {
+  content: "\f191";
+}
+
+/* line 1323, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-dot-circle-o:before {
+  content: "\f192";
+}
+
+/* line 1326, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wheelchair:before {
+  content: "\f193";
+}
+
+/* line 1329, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-vimeo-square:before {
+  content: "\f194";
+}
+
+/* line 1332, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-turkish-lira:before,
+.fa-try:before {
+  content: "\f195";
+}
+
+/* line 1336, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-plus-square-o:before {
+  content: "\f196";
+}
+
+/* line 1339, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-space-shuttle:before {
+  content: "\f197";
+}
+
+/* line 1342, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-slack:before {
+  content: "\f198";
+}
+
+/* line 1345, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-envelope-square:before {
+  content: "\f199";
+}
+
+/* line 1348, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wordpress:before {
+  content: "\f19a";
+}
+
+/* line 1351, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-openid:before {
+  content: "\f19b";
+}
+
+/* line 1354, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-institution:before,
+.fa-bank:before,
+.fa-university:before {
+  content: "\f19c";
+}
+
+/* line 1359, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mortar-board:before,
+.fa-graduation-cap:before {
+  content: "\f19d";
+}
+
+/* line 1363, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-yahoo:before {
+  content: "\f19e";
+}
+
+/* line 1366, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-google:before {
+  content: "\f1a0";
+}
+
+/* line 1369, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-reddit:before {
+  content: "\f1a1";
+}
+
+/* line 1372, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-reddit-square:before {
+  content: "\f1a2";
+}
+
+/* line 1375, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stumbleupon-circle:before {
+  content: "\f1a3";
+}
+
+/* line 1378, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stumbleupon:before {
+  content: "\f1a4";
+}
+
+/* line 1381, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-delicious:before {
+  content: "\f1a5";
+}
+
+/* line 1384, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-digg:before {
+  content: "\f1a6";
+}
+
+/* line 1387, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pied-piper-pp:before {
+  content: "\f1a7";
+}
+
+/* line 1390, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pied-piper-alt:before {
+  content: "\f1a8";
+}
+
+/* line 1393, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-drupal:before {
+  content: "\f1a9";
+}
+
+/* line 1396, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-joomla:before {
+  content: "\f1aa";
+}
+
+/* line 1399, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-language:before {
+  content: "\f1ab";
+}
+
+/* line 1402, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fax:before {
+  content: "\f1ac";
+}
+
+/* line 1405, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-building:before {
+  content: "\f1ad";
+}
+
+/* line 1408, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-child:before {
+  content: "\f1ae";
+}
+
+/* line 1411, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-paw:before {
+  content: "\f1b0";
+}
+
+/* line 1414, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-spoon:before {
+  content: "\f1b1";
+}
+
+/* line 1417, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cube:before {
+  content: "\f1b2";
+}
+
+/* line 1420, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cubes:before {
+  content: "\f1b3";
+}
+
+/* line 1423, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-behance:before {
+  content: "\f1b4";
+}
+
+/* line 1426, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-behance-square:before {
+  content: "\f1b5";
+}
+
+/* line 1429, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-steam:before {
+  content: "\f1b6";
+}
+
+/* line 1432, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-steam-square:before {
+  content: "\f1b7";
+}
+
+/* line 1435, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-recycle:before {
+  content: "\f1b8";
+}
+
+/* line 1438, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-automobile:before,
+.fa-car:before {
+  content: "\f1b9";
+}
+
+/* line 1442, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cab:before,
+.fa-taxi:before {
+  content: "\f1ba";
+}
+
+/* line 1446, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tree:before {
+  content: "\f1bb";
+}
+
+/* line 1449, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-spotify:before {
+  content: "\f1bc";
+}
+
+/* line 1452, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-deviantart:before {
+  content: "\f1bd";
+}
+
+/* line 1455, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-soundcloud:before {
+  content: "\f1be";
+}
+
+/* line 1458, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-database:before {
+  content: "\f1c0";
+}
+
+/* line 1461, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-pdf-o:before {
+  content: "\f1c1";
+}
+
+/* line 1464, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-word-o:before {
+  content: "\f1c2";
+}
+
+/* line 1467, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-excel-o:before {
+  content: "\f1c3";
+}
+
+/* line 1470, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-powerpoint-o:before {
+  content: "\f1c4";
+}
+
+/* line 1473, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-photo-o:before,
+.fa-file-picture-o:before,
+.fa-file-image-o:before {
+  content: "\f1c5";
+}
+
+/* line 1478, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-zip-o:before,
+.fa-file-archive-o:before {
+  content: "\f1c6";
+}
+
+/* line 1482, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-sound-o:before,
+.fa-file-audio-o:before {
+  content: "\f1c7";
+}
+
+/* line 1486, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-movie-o:before,
+.fa-file-video-o:before {
+  content: "\f1c8";
+}
+
+/* line 1490, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-file-code-o:before {
+  content: "\f1c9";
+}
+
+/* line 1493, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-vine:before {
+  content: "\f1ca";
+}
+
+/* line 1496, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-codepen:before {
+  content: "\f1cb";
+}
+
+/* line 1499, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-jsfiddle:before {
+  content: "\f1cc";
+}
+
+/* line 1502, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-life-bouy:before,
+.fa-life-buoy:before,
+.fa-life-saver:before,
+.fa-support:before,
+.fa-life-ring:before {
+  content: "\f1cd";
+}
+
+/* line 1509, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-circle-o-notch:before {
+  content: "\f1ce";
+}
+
+/* line 1512, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ra:before,
+.fa-resistance:before,
+.fa-rebel:before {
+  content: "\f1d0";
+}
+
+/* line 1517, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ge:before,
+.fa-empire:before {
+  content: "\f1d1";
+}
+
+/* line 1521, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-git-square:before {
+  content: "\f1d2";
+}
+
+/* line 1524, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-git:before {
+  content: "\f1d3";
+}
+
+/* line 1527, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-y-combinator-square:before,
+.fa-yc-square:before,
+.fa-hacker-news:before {
+  content: "\f1d4";
+}
+
+/* line 1532, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tencent-weibo:before {
+  content: "\f1d5";
+}
+
+/* line 1535, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-qq:before {
+  content: "\f1d6";
+}
+
+/* line 1538, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wechat:before,
+.fa-weixin:before {
+  content: "\f1d7";
+}
+
+/* line 1542, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-send:before,
+.fa-paper-plane:before {
+  content: "\f1d8";
+}
+
+/* line 1546, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-send-o:before,
+.fa-paper-plane-o:before {
+  content: "\f1d9";
+}
+
+/* line 1550, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-history:before {
+  content: "\f1da";
+}
+
+/* line 1553, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-circle-thin:before {
+  content: "\f1db";
+}
+
+/* line 1556, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-header:before {
+  content: "\f1dc";
+}
+
+/* line 1559, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-paragraph:before {
+  content: "\f1dd";
+}
+
+/* line 1562, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sliders:before {
+  content: "\f1de";
+}
+
+/* line 1565, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-share-alt:before {
+  content: "\f1e0";
+}
+
+/* line 1568, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-share-alt-square:before {
+  content: "\f1e1";
+}
+
+/* line 1571, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bomb:before {
+  content: "\f1e2";
+}
+
+/* line 1574, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-soccer-ball-o:before,
+.fa-futbol-o:before {
+  content: "\f1e3";
+}
+
+/* line 1578, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tty:before {
+  content: "\f1e4";
+}
+
+/* line 1581, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-binoculars:before {
+  content: "\f1e5";
+}
+
+/* line 1584, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-plug:before {
+  content: "\f1e6";
+}
+
+/* line 1587, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-slideshare:before {
+  content: "\f1e7";
+}
+
+/* line 1590, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-twitch:before {
+  content: "\f1e8";
+}
+
+/* line 1593, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-yelp:before {
+  content: "\f1e9";
+}
+
+/* line 1596, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-newspaper-o:before {
+  content: "\f1ea";
+}
+
+/* line 1599, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wifi:before {
+  content: "\f1eb";
+}
+
+/* line 1602, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-calculator:before {
+  content: "\f1ec";
+}
+
+/* line 1605, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-paypal:before {
+  content: "\f1ed";
+}
+
+/* line 1608, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-google-wallet:before {
+  content: "\f1ee";
+}
+
+/* line 1611, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cc-visa:before {
+  content: "\f1f0";
+}
+
+/* line 1614, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cc-mastercard:before {
+  content: "\f1f1";
+}
+
+/* line 1617, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cc-discover:before {
+  content: "\f1f2";
+}
+
+/* line 1620, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cc-amex:before {
+  content: "\f1f3";
+}
+
+/* line 1623, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cc-paypal:before {
+  content: "\f1f4";
+}
+
+/* line 1626, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cc-stripe:before {
+  content: "\f1f5";
+}
+
+/* line 1629, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bell-slash:before {
+  content: "\f1f6";
+}
+
+/* line 1632, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bell-slash-o:before {
+  content: "\f1f7";
+}
+
+/* line 1635, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-trash:before {
+  content: "\f1f8";
+}
+
+/* line 1638, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-copyright:before {
+  content: "\f1f9";
+}
+
+/* line 1641, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-at:before {
+  content: "\f1fa";
+}
+
+/* line 1644, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-eyedropper:before {
+  content: "\f1fb";
+}
+
+/* line 1647, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-paint-brush:before {
+  content: "\f1fc";
+}
+
+/* line 1650, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-birthday-cake:before {
+  content: "\f1fd";
+}
+
+/* line 1653, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-area-chart:before {
+  content: "\f1fe";
+}
+
+/* line 1656, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pie-chart:before {
+  content: "\f200";
+}
+
+/* line 1659, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-line-chart:before {
+  content: "\f201";
+}
+
+/* line 1662, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-lastfm:before {
+  content: "\f202";
+}
+
+/* line 1665, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-lastfm-square:before {
+  content: "\f203";
+}
+
+/* line 1668, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-toggle-off:before {
+  content: "\f204";
+}
+
+/* line 1671, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-toggle-on:before {
+  content: "\f205";
+}
+
+/* line 1674, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bicycle:before {
+  content: "\f206";
+}
+
+/* line 1677, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bus:before {
+  content: "\f207";
+}
+
+/* line 1680, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ioxhost:before {
+  content: "\f208";
+}
+
+/* line 1683, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-angellist:before {
+  content: "\f209";
+}
+
+/* line 1686, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cc:before {
+  content: "\f20a";
+}
+
+/* line 1689, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-shekel:before,
+.fa-sheqel:before,
+.fa-ils:before {
+  content: "\f20b";
+}
+
+/* line 1694, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-meanpath:before {
+  content: "\f20c";
+}
+
+/* line 1697, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-buysellads:before {
+  content: "\f20d";
+}
+
+/* line 1700, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-connectdevelop:before {
+  content: "\f20e";
+}
+
+/* line 1703, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-dashcube:before {
+  content: "\f210";
+}
+
+/* line 1706, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-forumbee:before {
+  content: "\f211";
+}
+
+/* line 1709, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-leanpub:before {
+  content: "\f212";
+}
+
+/* line 1712, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sellsy:before {
+  content: "\f213";
+}
+
+/* line 1715, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-shirtsinbulk:before {
+  content: "\f214";
+}
+
+/* line 1718, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-simplybuilt:before {
+  content: "\f215";
+}
+
+/* line 1721, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-skyatlas:before {
+  content: "\f216";
+}
+
+/* line 1724, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cart-plus:before {
+  content: "\f217";
+}
+
+/* line 1727, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cart-arrow-down:before {
+  content: "\f218";
+}
+
+/* line 1730, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-diamond:before {
+  content: "\f219";
+}
+
+/* line 1733, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ship:before {
+  content: "\f21a";
+}
+
+/* line 1736, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-user-secret:before {
+  content: "\f21b";
+}
+
+/* line 1739, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-motorcycle:before {
+  content: "\f21c";
+}
+
+/* line 1742, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-street-view:before {
+  content: "\f21d";
+}
+
+/* line 1745, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-heartbeat:before {
+  content: "\f21e";
+}
+
+/* line 1748, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-venus:before {
+  content: "\f221";
+}
+
+/* line 1751, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mars:before {
+  content: "\f222";
+}
+
+/* line 1754, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mercury:before {
+  content: "\f223";
+}
+
+/* line 1757, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-intersex:before,
+.fa-transgender:before {
+  content: "\f224";
+}
+
+/* line 1761, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-transgender-alt:before {
+  content: "\f225";
+}
+
+/* line 1764, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-venus-double:before {
+  content: "\f226";
+}
+
+/* line 1767, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mars-double:before {
+  content: "\f227";
+}
+
+/* line 1770, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-venus-mars:before {
+  content: "\f228";
+}
+
+/* line 1773, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mars-stroke:before {
+  content: "\f229";
+}
+
+/* line 1776, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mars-stroke-v:before {
+  content: "\f22a";
+}
+
+/* line 1779, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mars-stroke-h:before {
+  content: "\f22b";
+}
+
+/* line 1782, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-neuter:before {
+  content: "\f22c";
+}
+
+/* line 1785, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-genderless:before {
+  content: "\f22d";
+}
+
+/* line 1788, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-facebook-official:before {
+  content: "\f230";
+}
+
+/* line 1791, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pinterest-p:before {
+  content: "\f231";
+}
+
+/* line 1794, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-whatsapp:before {
+  content: "\f232";
+}
+
+/* line 1797, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-server:before {
+  content: "\f233";
+}
+
+/* line 1800, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-user-plus:before {
+  content: "\f234";
+}
+
+/* line 1803, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-user-times:before {
+  content: "\f235";
+}
+
+/* line 1806, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hotel:before,
+.fa-bed:before {
+  content: "\f236";
+}
+
+/* line 1810, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-viacoin:before {
+  content: "\f237";
+}
+
+/* line 1813, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-train:before {
+  content: "\f238";
+}
+
+/* line 1816, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-subway:before {
+  content: "\f239";
+}
+
+/* line 1819, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-medium:before {
+  content: "\f23a";
+}
+
+/* line 1822, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-yc:before,
+.fa-y-combinator:before {
+  content: "\f23b";
+}
+
+/* line 1826, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-optin-monster:before {
+  content: "\f23c";
+}
+
+/* line 1829, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-opencart:before {
+  content: "\f23d";
+}
+
+/* line 1832, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-expeditedssl:before {
+  content: "\f23e";
+}
+
+/* line 1835, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-battery-4:before,
+.fa-battery:before,
+.fa-battery-full:before {
+  content: "\f240";
+}
+
+/* line 1840, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-battery-3:before,
+.fa-battery-three-quarters:before {
+  content: "\f241";
+}
+
+/* line 1844, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-battery-2:before,
+.fa-battery-half:before {
+  content: "\f242";
+}
+
+/* line 1848, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-battery-1:before,
+.fa-battery-quarter:before {
+  content: "\f243";
+}
+
+/* line 1852, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-battery-0:before,
+.fa-battery-empty:before {
+  content: "\f244";
+}
+
+/* line 1856, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mouse-pointer:before {
+  content: "\f245";
+}
+
+/* line 1859, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-i-cursor:before {
+  content: "\f246";
+}
+
+/* line 1862, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-object-group:before {
+  content: "\f247";
+}
+
+/* line 1865, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-object-ungroup:before {
+  content: "\f248";
+}
+
+/* line 1868, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sticky-note:before {
+  content: "\f249";
+}
+
+/* line 1871, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-sticky-note-o:before {
+  content: "\f24a";
+}
+
+/* line 1874, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cc-jcb:before {
+  content: "\f24b";
+}
+
+/* line 1877, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-cc-diners-club:before {
+  content: "\f24c";
+}
+
+/* line 1880, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-clone:before {
+  content: "\f24d";
+}
+
+/* line 1883, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-balance-scale:before {
+  content: "\f24e";
+}
+
+/* line 1886, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hourglass-o:before {
+  content: "\f250";
+}
+
+/* line 1889, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hourglass-1:before,
+.fa-hourglass-start:before {
+  content: "\f251";
+}
+
+/* line 1893, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hourglass-2:before,
+.fa-hourglass-half:before {
+  content: "\f252";
+}
+
+/* line 1897, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hourglass-3:before,
+.fa-hourglass-end:before {
+  content: "\f253";
+}
+
+/* line 1901, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hourglass:before {
+  content: "\f254";
+}
+
+/* line 1904, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-grab-o:before,
+.fa-hand-rock-o:before {
+  content: "\f255";
+}
+
+/* line 1908, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-stop-o:before,
+.fa-hand-paper-o:before {
+  content: "\f256";
+}
+
+/* line 1912, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-scissors-o:before {
+  content: "\f257";
+}
+
+/* line 1915, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-lizard-o:before {
+  content: "\f258";
+}
+
+/* line 1918, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-spock-o:before {
+  content: "\f259";
+}
+
+/* line 1921, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-pointer-o:before {
+  content: "\f25a";
+}
+
+/* line 1924, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hand-peace-o:before {
+  content: "\f25b";
+}
+
+/* line 1927, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-trademark:before {
+  content: "\f25c";
+}
+
+/* line 1930, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-registered:before {
+  content: "\f25d";
+}
+
+/* line 1933, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-creative-commons:before {
+  content: "\f25e";
+}
+
+/* line 1936, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-gg:before {
+  content: "\f260";
+}
+
+/* line 1939, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-gg-circle:before {
+  content: "\f261";
+}
+
+/* line 1942, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tripadvisor:before {
+  content: "\f262";
+}
+
+/* line 1945, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-odnoklassniki:before {
+  content: "\f263";
+}
+
+/* line 1948, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-odnoklassniki-square:before {
+  content: "\f264";
+}
+
+/* line 1951, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-get-pocket:before {
+  content: "\f265";
+}
+
+/* line 1954, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wikipedia-w:before {
+  content: "\f266";
+}
+
+/* line 1957, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-safari:before {
+  content: "\f267";
+}
+
+/* line 1960, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-chrome:before {
+  content: "\f268";
+}
+
+/* line 1963, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-firefox:before {
+  content: "\f269";
+}
+
+/* line 1966, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-opera:before {
+  content: "\f26a";
+}
+
+/* line 1969, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-internet-explorer:before {
+  content: "\f26b";
+}
+
+/* line 1972, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-tv:before,
+.fa-television:before {
+  content: "\f26c";
+}
+
+/* line 1976, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-contao:before {
+  content: "\f26d";
+}
+
+/* line 1979, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-500px:before {
+  content: "\f26e";
+}
+
+/* line 1982, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-amazon:before {
+  content: "\f270";
+}
+
+/* line 1985, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-calendar-plus-o:before {
+  content: "\f271";
+}
+
+/* line 1988, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-calendar-minus-o:before {
+  content: "\f272";
+}
+
+/* line 1991, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-calendar-times-o:before {
+  content: "\f273";
+}
+
+/* line 1994, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-calendar-check-o:before {
+  content: "\f274";
+}
+
+/* line 1997, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-industry:before {
+  content: "\f275";
+}
+
+/* line 2000, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-map-pin:before {
+  content: "\f276";
+}
+
+/* line 2003, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-map-signs:before {
+  content: "\f277";
+}
+
+/* line 2006, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-map-o:before {
+  content: "\f278";
+}
+
+/* line 2009, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-map:before {
+  content: "\f279";
+}
+
+/* line 2012, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-commenting:before {
+  content: "\f27a";
+}
+
+/* line 2015, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-commenting-o:before {
+  content: "\f27b";
+}
+
+/* line 2018, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-houzz:before {
+  content: "\f27c";
+}
+
+/* line 2021, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-vimeo:before {
+  content: "\f27d";
+}
+
+/* line 2024, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-black-tie:before {
+  content: "\f27e";
+}
+
+/* line 2027, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fonticons:before {
+  content: "\f280";
+}
+
+/* line 2030, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-reddit-alien:before {
+  content: "\f281";
+}
+
+/* line 2033, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-edge:before {
+  content: "\f282";
+}
+
+/* line 2036, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-credit-card-alt:before {
+  content: "\f283";
+}
+
+/* line 2039, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-codiepie:before {
+  content: "\f284";
+}
+
+/* line 2042, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-modx:before {
+  content: "\f285";
+}
+
+/* line 2045, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fort-awesome:before {
+  content: "\f286";
+}
+
+/* line 2048, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-usb:before {
+  content: "\f287";
+}
+
+/* line 2051, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-product-hunt:before {
+  content: "\f288";
+}
+
+/* line 2054, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-mixcloud:before {
+  content: "\f289";
+}
+
+/* line 2057, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-scribd:before {
+  content: "\f28a";
+}
+
+/* line 2060, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pause-circle:before {
+  content: "\f28b";
+}
+
+/* line 2063, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pause-circle-o:before {
+  content: "\f28c";
+}
+
+/* line 2066, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stop-circle:before {
+  content: "\f28d";
+}
+
+/* line 2069, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-stop-circle-o:before {
+  content: "\f28e";
+}
+
+/* line 2072, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-shopping-bag:before {
+  content: "\f290";
+}
+
+/* line 2075, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-shopping-basket:before {
+  content: "\f291";
+}
+
+/* line 2078, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-hashtag:before {
+  content: "\f292";
+}
+
+/* line 2081, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bluetooth:before {
+  content: "\f293";
+}
+
+/* line 2084, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bluetooth-b:before {
+  content: "\f294";
+}
+
+/* line 2087, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-percent:before {
+  content: "\f295";
+}
+
+/* line 2090, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-gitlab:before {
+  content: "\f296";
+}
+
+/* line 2093, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wpbeginner:before {
+  content: "\f297";
+}
+
+/* line 2096, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wpforms:before {
+  content: "\f298";
+}
+
+/* line 2099, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-envira:before {
+  content: "\f299";
+}
+
+/* line 2102, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-universal-access:before {
+  content: "\f29a";
+}
+
+/* line 2105, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wheelchair-alt:before {
+  content: "\f29b";
+}
+
+/* line 2108, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-question-circle-o:before {
+  content: "\f29c";
+}
+
+/* line 2111, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-blind:before {
+  content: "\f29d";
+}
+
+/* line 2114, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-audio-description:before {
+  content: "\f29e";
+}
+
+/* line 2117, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-volume-control-phone:before {
+  content: "\f2a0";
+}
+
+/* line 2120, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-braille:before {
+  content: "\f2a1";
+}
+
+/* line 2123, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-assistive-listening-systems:before {
+  content: "\f2a2";
+}
+
+/* line 2126, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-asl-interpreting:before,
+.fa-american-sign-language-interpreting:before {
+  content: "\f2a3";
+}
+
+/* line 2130, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-deafness:before,
+.fa-hard-of-hearing:before,
+.fa-deaf:before {
+  content: "\f2a4";
+}
+
+/* line 2135, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-glide:before {
+  content: "\f2a5";
+}
+
+/* line 2138, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-glide-g:before {
+  content: "\f2a6";
+}
+
+/* line 2141, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-signing:before,
+.fa-sign-language:before {
+  content: "\f2a7";
+}
+
+/* line 2145, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-low-vision:before {
+  content: "\f2a8";
+}
+
+/* line 2148, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-viadeo:before {
+  content: "\f2a9";
+}
+
+/* line 2151, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-viadeo-square:before {
+  content: "\f2aa";
+}
+
+/* line 2154, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-snapchat:before {
+  content: "\f2ab";
+}
+
+/* line 2157, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-snapchat-ghost:before {
+  content: "\f2ac";
+}
+
+/* line 2160, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-snapchat-square:before {
+  content: "\f2ad";
+}
+
+/* line 2163, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-pied-piper:before {
+  content: "\f2ae";
+}
+
+/* line 2166, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-first-order:before {
+  content: "\f2b0";
+}
+
+/* line 2169, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-yoast:before {
+  content: "\f2b1";
+}
+
+/* line 2172, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-themeisle:before {
+  content: "\f2b2";
+}
+
+/* line 2175, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-google-plus-circle:before,
+.fa-google-plus-official:before {
+  content: "\f2b3";
+}
+
+/* line 2179, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-fa:before,
+.fa-font-awesome:before {
+  content: "\f2b4";
+}
+
+/* line 2183, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-handshake-o:before {
+  content: "\f2b5";
+}
+
+/* line 2186, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-envelope-open:before {
+  content: "\f2b6";
+}
+
+/* line 2189, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-envelope-open-o:before {
+  content: "\f2b7";
+}
+
+/* line 2192, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-linode:before {
+  content: "\f2b8";
+}
+
+/* line 2195, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-address-book:before {
+  content: "\f2b9";
+}
+
+/* line 2198, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-address-book-o:before {
+  content: "\f2ba";
+}
+
+/* line 2201, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-vcard:before,
+.fa-address-card:before {
+  content: "\f2bb";
+}
+
+/* line 2205, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-vcard-o:before,
+.fa-address-card-o:before {
+  content: "\f2bc";
+}
+
+/* line 2209, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-user-circle:before {
+  content: "\f2bd";
+}
+
+/* line 2212, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-user-circle-o:before {
+  content: "\f2be";
+}
+
+/* line 2215, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-user-o:before {
+  content: "\f2c0";
+}
+
+/* line 2218, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-id-badge:before {
+  content: "\f2c1";
+}
+
+/* line 2221, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-drivers-license:before,
+.fa-id-card:before {
+  content: "\f2c2";
+}
+
+/* line 2225, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-drivers-license-o:before,
+.fa-id-card-o:before {
+  content: "\f2c3";
+}
+
+/* line 2229, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-quora:before {
+  content: "\f2c4";
+}
+
+/* line 2232, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-free-code-camp:before {
+  content: "\f2c5";
+}
+
+/* line 2235, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-telegram:before {
+  content: "\f2c6";
+}
+
+/* line 2238, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thermometer-4:before,
+.fa-thermometer:before,
+.fa-thermometer-full:before {
+  content: "\f2c7";
+}
+
+/* line 2243, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thermometer-3:before,
+.fa-thermometer-three-quarters:before {
+  content: "\f2c8";
+}
+
+/* line 2247, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thermometer-2:before,
+.fa-thermometer-half:before {
+  content: "\f2c9";
+}
+
+/* line 2251, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thermometer-1:before,
+.fa-thermometer-quarter:before {
+  content: "\f2ca";
+}
+
+/* line 2255, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-thermometer-0:before,
+.fa-thermometer-empty:before {
+  content: "\f2cb";
+}
+
+/* line 2259, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-shower:before {
+  content: "\f2cc";
+}
+
+/* line 2262, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bathtub:before,
+.fa-s15:before,
+.fa-bath:before {
+  content: "\f2cd";
+}
+
+/* line 2267, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-podcast:before {
+  content: "\f2ce";
+}
+
+/* line 2270, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-window-maximize:before {
+  content: "\f2d0";
+}
+
+/* line 2273, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-window-minimize:before {
+  content: "\f2d1";
+}
+
+/* line 2276, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-window-restore:before {
+  content: "\f2d2";
+}
+
+/* line 2279, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-times-rectangle:before,
+.fa-window-close:before {
+  content: "\f2d3";
+}
+
+/* line 2283, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-times-rectangle-o:before,
+.fa-window-close-o:before {
+  content: "\f2d4";
+}
+
+/* line 2287, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-bandcamp:before {
+  content: "\f2d5";
+}
+
+/* line 2290, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-grav:before {
+  content: "\f2d6";
+}
+
+/* line 2293, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-etsy:before {
+  content: "\f2d7";
+}
+
+/* line 2296, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-imdb:before {
+  content: "\f2d8";
+}
+
+/* line 2299, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-ravelry:before {
+  content: "\f2d9";
+}
+
+/* line 2302, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-eercast:before {
+  content: "\f2da";
+}
+
+/* line 2305, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-microchip:before {
+  content: "\f2db";
+}
+
+/* line 2308, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-snowflake-o:before {
+  content: "\f2dc";
+}
+
+/* line 2311, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-superpowers:before {
+  content: "\f2dd";
+}
+
+/* line 2314, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-wpexplorer:before {
+  content: "\f2de";
+}
+
+/* line 2317, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.fa-meetup:before {
+  content: "\f2e0";
+}
+
+/* line 2320, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* line 2330, /home/ubuntu/workspace/app/assets/stylesheets/font-awesome.scss */
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}
+/* line 20, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+*, *::after, *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 27, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+body {
+  background: #ECEFF1;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: #37474F;
+}
+
+/* line 34, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+h1, h2, h3, strong {
+  font-weight: 400;
+}
+
+/* line 37, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+/* line 41, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+h3 {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+/* line 45, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], select {
+  background: #fff;
+  border: 1px solid #d6dee2;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  padding: 6px 10px;
+  width: 100%;
+}
+/* line 52, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="number"]:focus, select:focus {
+  border-color: #81C784;
+  box-shadow: none;
+  outline: 0;
+}
+
+/* line 59, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.field_with_errors input[type="text"], .field_with_errors input[type="email"], .field_with_errors input[type="password"], .field_with_errors input[type="number"] {
+  border-color: #EF9A9A;
+}
+
+/* line 64, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+a:not(.btn) {
+  color: #22887B;
+  transition: opacity .2s ease-in-out;
+  text-decoration: none;
+}
+/* line 68, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+a:not(.btn):hover {
+  opacity: .8;
+}
+
+/* line 73, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.main-header {
+  background: #37474F;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  color: #ECEFF1;
+  display: flex;
+  margin-bottom: 40px;
+  padding: 20px 30px;
+}
+/* line 80, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.main-header a {
+  color: #ECEFF1;
+}
+
+/* line 85, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.brand {
+  font-size: 36px;
+}
+
+/* line 89, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.user-data {
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+}
+/* line 93, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.user-data .btn {
+  margin: 0 0 0 20px;
+}
+/* line 96, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.user-data a {
+  margin-left: 40px;
+}
+
+/* line 101, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.user-data__nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+/* line 105, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.user-data__nav a {
+  transition: opacity .2s ease-in-out;
+}
+/* line 107, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.user-data__nav a:hover {
+  opacity: .8;
+}
+
+/* line 113, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.user-data__user {
+  opacity: .6;
+  margin-left: 40px;
+}
+
+/* line 118, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.basic-form {
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+/* line 123, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.field {
+  margin: 20px 0;
+}
+/* line 125, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.field label {
+  display: block;
+  margin: 0 0 5px;
+}
+/* line 129, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.field em, .field i {
+  color: #7c96a3;
+  font-size: 13px;
+  font-style: normal;
+}
+/* line 134, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.field i {
+  display: inline-block;
+  margin-bottom: 3px;
+}
+/* line 138, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.field select {
+  display: block;
+  width: 100%;
+}
+
+/* line 144, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.custom-select {
+  display: block;
+  position: relative;
+}
+/* line 147, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.custom-select select {
+  border-radius: 0;
+  display: block;
+  margin: 0;
+  outline: none;
+  transition: all .2s ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+}
+/* line 158, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.custom-select select:checked:after {
+  color: #000;
+}
+/* line 163, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.custom-select::after {
+  background-position: center;
+  border: 5px solid transparent;
+  border-top-color: #a2a2a2;
+  display: block;
+  content: "";
+  width: 0;
+  height: 0;
+  margin-top: -2px;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* line 179, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+select::-ms-expand {
+  visibility: hidden;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* line 183, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+  .custom-select select {
+    padding-right: 30px;
+  }
+}
+/* line 188, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.checkbox-field {
+  margin-bottom: 20px;
+}
+
+/* line 192, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.field-link {
+  position: relative;
+}
+
+/* line 196, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.get-info {
+  margin-right: -80px;
+  position: absolute;
+  right: 0;
+  top: 20%;
+}
+
+/* line 203, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.actions {
+  margin-top: 20px;
+}
+
+/* line 207, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+#error_explanation {
+  background: #EF9A9A;
+  border-radius: 3px;
+  padding: 10px;
+}
+/* line 211, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+#error_explanation h2, #error_explanation ul {
+  font-size: 17px;
+  font-weight: normal;
+  margin: 0;
+}
+/* line 216, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+#error_explanation ul {
+  list-style: none;
+}
+
+/* line 221, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.main-content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+/* line 224, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.main-content p {
+  margin: 20px 0;
+}
+
+/* line 229, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.isbn-nr {
+  color: #7c96a3;
+  text-transform: uppercase;
+}
+/* line 232, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.isbn-nr strong {
+  color: #37474F;
+}
+
+/* line 238, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+table {
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  width: 100%;
+}
+/* line 242, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+table th, table td {
+  border-bottom: 1px solid #7c96a3;
+  padding: 8px 10px;
+  text-align: left;
+}
+/* line 247, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+table th {
+  background: #DCEDC8;
+  font-weight: 400;
+}
+/* line 251, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+table td {
+  border-bottom: 1px solid #b8c6cd;
+  background: #ECEFF1;
+}
+
+/* line 256, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.book-status {
+  text-transform: uppercase;
+}
+/* line 258, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.book-status--reserved {
+  color: #b19640;
+}
+/* line 261, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.book-status--available, .book-status--taken {
+  color: #42ab65;
+}
+/* line 264, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.book-status--canceled, .book-status--expired {
+  color: #ccc4c1;
+}
+/* line 267, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.book-status--returned {
+  color: #37474F;
+}
+
+/* line 273, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn {
+  background: #22887B;
+  border: 0;
+  border-radius: 3px;
+  color: #ECEFF1;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 17px;
+  margin: 0 15px 20px 0;
+  padding: 10px 20px;
+  transition: background-color .2s ease-in-out;
+  text-decoration: none;
+}
+/* line 285, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn:focus {
+  outline: 0;
+}
+/* line 288, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn:hover {
+  background-color: #279c8d;
+}
+/* line 291, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn .fa {
+  margin-left: -4px;
+  margin-right: 8px;
+}
+
+/* line 296, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn--logout {
+  background: transparent;
+  border: 2px solid #ECEFF1;
+}
+/* line 299, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn--logout:hover {
+  background: #4c626d;
+}
+
+/* line 303, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn--cancel {
+  border: 2px solid #37474F;
+  background: transparent;
+  color: #37474F;
+}
+/* line 307, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn--cancel:hover {
+  background: white;
+}
+
+/* line 311, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn--delete {
+  background: #B71C1C;
+  color: #ECEFF1;
+}
+/* line 314, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.btn--delete:hover {
+  background: #de2828;
+}
+
+/* line 319, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.notice, .alert {
+  margin: 0;
+  padding: 10px 20px;
+}
+/* line 322, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.notice:empty, .alert:empty {
+  display: none;
+}
+
+/* line 326, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.notice {
+  background: #C8E6C9;
+}
+
+/* line 329, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.alert {
+  background: #EF9A9A;
+}
+
+/* line 333, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.delete-user {
+  border: 4px solid #B71C1C;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+/* line 338, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.delete-user h3 {
+  font-weight: bold;
+  margin: 0 0 20px;
+}
+/* line 342, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.delete-user .btn {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+/* line 347, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.search-form {
+  align-items: center;
+  display: flex;
+}
+/* line 350, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.search-form .btn {
+  margin: 0;
+  white-space: nowrap;
+}
+/* line 354, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.search-form input {
+  margin-right: 20px;
+}
+
+/* line 358, /home/ubuntu/workspace/app/assets/stylesheets/home.scss */
+.googleauth {
+  background: url(btn_google_signin_dark_normal_web.png);
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
