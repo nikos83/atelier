@@ -7,6 +7,7 @@
         <th>title</th>
         <th>ISBN</th>
         <th>action</th>
+        <th>fro 18</th>
       </tr>
     </thead>
     <tbody>
@@ -14,7 +15,8 @@
         <tr>
           <td><%= book.title %></td>
           <td><%= book.isbn %></td>
-          <td><%= link_to('show', book_path(book.id)) %>
+          <td><%= link_to('show', book_path(book.id)) %></td>
+          <td><%= book.category.for_grownups? %></td>
         </tr>
       <% end %>
     </tbody>
@@ -36,7 +38,7 @@
           <td><%= book.title %></td>
           <td><%= book.isbn %></td>
           <td><%= book.category.name %></td>
-          <td><%= link_to('show', book_path(book.id)) %>
+          <td><%= link_to('show', book_path(book.id)) %></td>
         </tr>
       <% end %>
     </tbody>

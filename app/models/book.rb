@@ -57,6 +57,8 @@ class Book < ApplicationRecord
   def available_reservation
     reservations.find_by(status: 'AVAILABLE')
   end
+
+
   private
 
 end

@@ -31,7 +31,7 @@ class Reservation < ApplicationRecord
       "-"
     end
   end
-
+ 
   private
 
   def set_expiration

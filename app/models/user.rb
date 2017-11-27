@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_many :reservations
   devise :omniauthable, omniauth_providers: [:google_oauth2,:facebook,:github]
+  
+  private
 end
