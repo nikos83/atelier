@@ -48,37 +48,11 @@ class UserCalendarNotifier
     end
   end
 
-  private
-  attr_accessor :client, :service
-
-  def api_params(cal, reservation)
-    if reservation.taken?
-      {
-        api_method: service.events.insert,
-        parameters: {
-        'calendarId' => cal['id'],
-        'sendNotifications' => true,
-      },
-        body: JSON.dump(event(reservation)),
-        headers: {'Content-Type' => 'application/json'}
-      }
-    elsif reservation.status == 'RETURNED' && reservation.calendar_event_oid.present?
-      {
-        api_method: service.events.delete,
-        parameters: {
-          'calendarId' => cal['id'],
-          'eventId' => reservation.calendar_event_oid
-        }
-      }
-    end
-  end
-
   def find_calendar_by(hash)
     calendar_list.find { |entry| entry[hash.keys.first.to_s] == hash.values.first }
   end
 
   def calendar_list
-    byebug
     response_body_hash(
       client.execute(api_method: service.calendar_list.list)
     )['items']
@@ -101,4 +75,5 @@ class UserCalendarNotifier
   def format_time(time)
     time.utc.strftime("%Y-%m-%dT%H:%M:%S%z")
   end
+
 end
