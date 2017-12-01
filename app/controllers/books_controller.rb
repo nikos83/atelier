@@ -49,7 +49,7 @@ end
   private
   def adult?
     @user = current_user
-    (Time.now.year - @user.birghtday.year)>19
+     ((Date.today - @user.birghtday) / 365).to_i > 19
   end
   def for_grownups?
     @book = Book.find(params[:id])
@@ -79,11 +79,11 @@ end
   end
 
   def load_book
-    if !adult? && for_grownups?
-      redirect_to root_path, alert: "You must be an Adult!"
-    else
+    # if !adult? && for_grownups?
+    #   redirect_to root_path, alert: "You must be an Adult!"
+    # else
       @book = Book.find(params[:id])
-    end
+    #end
   end
 
   def new_book

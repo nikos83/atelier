@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126125528) do
+ActiveRecord::Schema.define(version: 20171129192910) do
 
   create_table "authors", force: :cascade do |t|
     t.string "firstname"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20171126125528) do
     t.integer "book_id"
     t.integer "user_id"
     t.datetime "expires_at"
+    t.string "calendar_event_oid"
     t.index ["book_id"], name: "index_book_reservations_on_book_id"
     t.index ["user_id"], name: "index_book_reservations_on_user_id"
   end
@@ -47,10 +48,6 @@ ActiveRecord::Schema.define(version: 20171126125528) do
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-  end
-
   create_table "publishers", force: :cascade do |t|
     t.string "name"
   end
@@ -71,6 +68,10 @@ ActiveRecord::Schema.define(version: 20171126125528) do
     t.boolean "admin", default: false
     t.string "name"
     t.date "birghtday"
+    t.string "provider"
+    t.string "uid"
+    t.string "token"
+    t.string "refresh_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -17,11 +17,9 @@ class Book < ApplicationRecord
   def can_be_taken?(user)
     not_taken? && ( available_for_user?(user) || reservations.empty? )
   end
-
- 
-
+  
   def can_be_given_back?(user)
-    reservations.find_by(user: user, status: 'TAKEN').present?
+    ::GivenBackPolicy.new(user: user, book: self).applies?
   end
 
 
@@ -60,5 +58,8 @@ class Book < ApplicationRecord
 
 
   private
+  def notify_user_calendar(reservation)
+    UserCalendarNotifier.new(reservation.user).perform(reservation)
+  end
 
 end

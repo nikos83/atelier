@@ -21,6 +21,7 @@ gem 'sidekiq'
 gem 'active_hash'
 #social logins
 #gem 'omniauth-twitter'
+gem 'google-api-client', '0.8.2', require: 'google/api_client'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'

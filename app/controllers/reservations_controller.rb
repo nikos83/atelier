@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
   def take
     reservations_handler.take(book)
     @user = current_user
-   BookTakenMailer.book_taken_email(@user, @book).deliver_now
+  # BookTakenMailer.book_taken_email(@user, @book).deliver_now
     redirect_to(book_path(book.id))
   end
 

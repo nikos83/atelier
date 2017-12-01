@@ -10,7 +10,9 @@ class ReservationsHandler
       book.available_reservation.update_attributes(status: 'TAKEN')
     else
       book.reservations.create(user: user, status: 'TAKEN')
-    end
+    end.tap {|reservation|
+      notify_user_calendar(reservation)
+    }
   end
 
   def give_back(book)
@@ -33,6 +35,10 @@ class ReservationsHandler
 
   private
   attr_reader :user
+  
+  def notify_user_calendar(reservation)
+    UserCalendarNotifier.new(reservation.user).perform(reservation)
+  end
 
 
   def next_in_queue(book)
