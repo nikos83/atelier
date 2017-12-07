@@ -17,8 +17,11 @@ class ReservationsHandler
 
   def give_back(book)
     ActiveRecord::Base.transaction do
-      book.reservations.find_by(status: 'TAKEN').update_attributes(status: 'RETURNED')
-      book.next_in_queue.update_attributes(status: 'AVAILABLE') if next_in_queue(book).present?
+      book.reservations.find_by(status: 'TAKEN').tap { |reservation|
+        reservation.update_attributes(status: 'RETURNED')
+        notify_user_calendar(reservation)
+      }
+       book.next_in_queue.update_attributes(status: 'AVAILABLE') if next_in_queue(book).present?
     end
   end
 
